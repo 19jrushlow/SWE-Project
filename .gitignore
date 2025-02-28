@@ -6,3 +6,4 @@ config/.env
 
 # Compiled JS files (Change?)
 controllers/static/IDE.js
+controllers/static/IDE.js.map
