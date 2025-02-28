@@ -3,9 +3,7 @@
 
 Node.js is required to initialize the project, it can be installed at: https://nodejs.org/en.
 
-Once you have installed Node.js, run setup.bat to automatically install dependencies. 
-
-Or, you can manually do this by changing directory to the project directory and then running the command npm run setup.
+You can manually install dependencies by running the command npm run setup within the project directory in a terminal.
 
 **Running and testing:**
 
