@@ -24,8 +24,6 @@ Then, navigate to the bottom of the explorer:
 
 You can run the NPM scripts from here. Setup performs a clean install of the dependencies, compile will compile all typescript files, and server will run the webserver.
 
-To start the server, run the command "npm run server".
-
 Sources:
 
 - Compiler explorer: https://godbolt.org/
