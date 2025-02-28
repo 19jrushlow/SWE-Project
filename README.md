@@ -16,6 +16,7 @@ If you are doing this in vscode:
 Once you have downloaded the repository, in the top right of the explorer menu click this button, and then ensure that NPM Scripts has a check next to it.
 
 ![Step1](https://github.com/user-attachments/assets/ab932a66-394f-4b82-abef-33768771c5d6)
+
 ![Step2](https://github.com/user-attachments/assets/3c35fdce-fe97-4536-ad55-9d4ce96f463b)
 
 Then, navigate to the bottom of the explorer:
