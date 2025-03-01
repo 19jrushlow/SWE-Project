@@ -3,7 +3,9 @@
 
 Node.js is required to initialize the project, it can be installed at: https://nodejs.org/en.
 
-You can manually install dependencies by running the command npm run setup within the project directory in a terminal.
+To set up the config file, navigate to ./config/. Make a copy of the file ".env.example", and rename it to ".env".
+
+You can manually install dependencies by running the command npm run setup within the project directory in a terminal. Or, use the steps in the running and testing section to configure vscode to do this for you.
 
 **Running and testing:**
 
