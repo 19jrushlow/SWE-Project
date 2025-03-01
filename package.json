@@ -17,6 +17,7 @@
   "scripts": {
     "setup": "npm ci",
     "compile": "tsc",
+    "test": "",
     "server": "node server.js"
   },
   "dependencies": {
