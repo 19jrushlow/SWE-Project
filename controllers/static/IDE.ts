@@ -54,7 +54,7 @@ let request: CompilerRequest = {
 
 const editor = ace.edit("editor");
 editor.session.setMode("ace/mode/python");
-editor.setTheme("ace/theme/monokai")
+editor.setTheme("ace/theme/monokai");
 
 
 function setLanguage(languageKey: string): void {
@@ -70,15 +70,16 @@ function setLanguage(languageKey: string): void {
 
 	editor.session.setMode(`ace/mode/${aceLanguageID}`);
 	executionURL = `https://godbolt.org/api/compiler/${compilerID}/compile`;
-	
-	console.log(`Language set to ${compilerLanguageID}, Compiler set to ${compilerID}`);
 }
 
-function runCode(): void {
+async function runCode(): Promise<void> {
 	request.source = editor.getValue();
 	const outputElement = document.getElementById("output");
+	const runCodeButton = document.getElementById("run-code") as HTMLInputElement;
+	
 	outputElement.textContent = "";
-
+	runCodeButton.disabled = true;
+	
 	fetch(executionURL, 
 	{
 		method: "POST",
@@ -99,4 +100,7 @@ function runCode(): void {
 	.catch(error => {
 		console.error('Error:', error);
 	});
+	
+	await new Promise(resolve => setTimeout(resolve, 1500));
+	runCodeButton.disabled = false;
 }
