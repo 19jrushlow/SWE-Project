@@ -17,6 +17,25 @@ interface CompilerRequest {
 	source?: string;
 }
 
+interface languageBinding {
+	compilerLanguageID: string;
+	aceLanguageID: string;
+	compilerID: string;
+}
+
+
+const bindings: { [key: string]: languageBinding } = {
+	python: {
+		compilerLanguageID: "python",
+		aceLanguageID: "python",
+		compilerID: "python313"
+	},
+	cpp: {
+		compilerLanguageID: "c++",
+		aceLanguageID: "c_cpp",
+		compilerID: "g82"
+	}
+};
 
 let executionURL = "https://godbolt.org/api/compiler/python313/compile";
 let request: CompilerRequest = {
@@ -36,11 +55,16 @@ let request: CompilerRequest = {
 const editor = ace.edit("editor");
 editor.session.setMode("ace/mode/python");
 editor.setTheme("ace/theme/monokai")
-// Example of how to change the language: arg1 is the language ID for the Compiler Explorer API, arg2 is language ID for the Ace API, Arg 3 is the compiler
-// setLanguage("c++", "c_cpp", "g82")
 
 
-function setLanguage(compilerLanguageID: string, aceLanguageID: string, compilerID: string): void {
+function setLanguage(languageKey: string): void {
+	const binding = bindings[languageKey];
+	if (!binding) {return;}
+	
+	const compilerLanguageID = binding.compilerLanguageID;
+	const aceLanguageID = binding.aceLanguageID;
+	const compilerID = binding.compilerID;
+	
 	request.lang = compilerLanguageID;
 	request.compiler = compilerID;
 
