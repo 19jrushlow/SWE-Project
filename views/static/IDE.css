@@ -6,10 +6,21 @@
 	height: 500px;
 }
 
-#run-code {
+#interaction-container {
+	display: flex;
+	gap: 10px;
+	
 	position: relative;
 	top: 10px;
 	left: 30px;
+}
+
+#run-code {
+	padding: 5px;
+}
+
+#languageDropdown {
+	padding: 5px;
 }
 
 #output {

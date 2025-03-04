@@ -37,9 +37,9 @@ const bindings: { [key: string]: languageBinding } = {
 	}
 };
 
-let executionURL = "https://godbolt.org/api/compiler/python313/compile";
+let executionURL = "";
 let request: CompilerRequest = {
-	compiler: "python313",
+	compiler: "",
 	options: {
 		compilerOptions: {
 			executorRequest: true
@@ -48,13 +48,20 @@ let request: CompilerRequest = {
 			execute: true
 		},
 	},
-	lang: "python",
+	lang: "",
 	allowStoreCodeDebug: true
 }
 
+
 const editor = ace.edit("editor");
-editor.session.setMode("ace/mode/python");
 editor.setTheme("ace/theme/monokai");
+setLanguage("python")
+
+populateLanguageDropdown();
+document.getElementById("language-dropdown")?.addEventListener("change", (event) => {
+	const selectedLanguage = (event.target as HTMLSelectElement).value;
+	setLanguage(selectedLanguage);
+});
 
 
 function setLanguage(languageKey: string): void {
@@ -70,6 +77,19 @@ function setLanguage(languageKey: string): void {
 
 	editor.session.setMode(`ace/mode/${aceLanguageID}`);
 	executionURL = `https://godbolt.org/api/compiler/${compilerID}/compile`;
+}
+
+function populateLanguageDropdown() {
+	const dropdown = document.getElementById("language-dropdown") as HTMLSelectElement;
+	
+	for (const key in bindings) {
+		if (bindings.hasOwnProperty(key)) {
+			const option = document.createElement("option");
+			option.value = key;
+			option.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+			dropdown.appendChild(option);
+		}
+	}
 }
 
 async function runCode(): Promise<void> {

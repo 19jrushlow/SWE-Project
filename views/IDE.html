@@ -9,12 +9,15 @@
 
 <div id="editor"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
-<script src="IDE.js"></script>
-
-<button id = "run-code" type="button" onclick="runCode()">run code</button>
+<div id="interaction-container">
+	<button id = "run-code" type="button" onclick="runCode()">run code</button>
+	<select id="language-dropdown"></select>
+</div>
 
 <pre id="output"></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+<script src="IDE.js"></script>
 
 </body>
 </html>
