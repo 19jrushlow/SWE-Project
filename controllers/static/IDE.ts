@@ -17,10 +17,29 @@ interface CompilerRequest {
 	source?: string;
 }
 
+interface languageBinding {
+	compilerLanguageID: string;
+	aceLanguageID: string;
+	compilerID: string;
+}
 
-let executionURL = "https://godbolt.org/api/compiler/python313/compile";
+
+const bindings: { [key: string]: languageBinding } = {
+	python: {
+		compilerLanguageID: "python",
+		aceLanguageID: "python",
+		compilerID: "python313"
+	},
+	cpp: {
+		compilerLanguageID: "c++",
+		aceLanguageID: "c_cpp",
+		compilerID: "g82"
+	}
+};
+
+let executionURL = "";
 let request: CompilerRequest = {
-	compiler: "python313",
+	compiler: "",
 	options: {
 		compilerOptions: {
 			executorRequest: true
@@ -29,32 +48,58 @@ let request: CompilerRequest = {
 			execute: true
 		},
 	},
-	lang: "python",
+	lang: "",
 	allowStoreCodeDebug: true
 }
 
+
 const editor = ace.edit("editor");
-editor.session.setMode("ace/mode/python");
-editor.setTheme("ace/theme/monokai")
-// Example of how to change the language: arg1 is the language ID for the Compiler Explorer API, arg2 is language ID for the Ace API, Arg 3 is the compiler
-// setLanguage("c++", "c_cpp", "g82")
+editor.setTheme("ace/theme/monokai");
+setLanguage("python")
+
+populateLanguageDropdown();
+document.getElementById("language-dropdown")?.addEventListener("change", (event) => {
+	const selectedLanguage = (event.target as HTMLSelectElement).value;
+	setLanguage(selectedLanguage);
+});
 
 
-function setLanguage(compilerLanguageID: string, aceLanguageID: string, compilerID: string): void {
+function setLanguage(languageKey: string): void {
+	const binding = bindings[languageKey];
+	if (!binding) {return;}
+	
+	const compilerLanguageID = binding.compilerLanguageID;
+	const aceLanguageID = binding.aceLanguageID;
+	const compilerID = binding.compilerID;
+	
 	request.lang = compilerLanguageID;
 	request.compiler = compilerID;
 
 	editor.session.setMode(`ace/mode/${aceLanguageID}`);
 	executionURL = `https://godbolt.org/api/compiler/${compilerID}/compile`;
-	
-	console.log(`Language set to ${compilerLanguageID}, Compiler set to ${compilerID}`);
 }
 
-function runCode(): void {
+function populateLanguageDropdown() {
+	const dropdown = document.getElementById("language-dropdown") as HTMLSelectElement;
+	
+	for (const key in bindings) {
+		if (bindings.hasOwnProperty(key)) {
+			const option = document.createElement("option");
+			option.value = key;
+			option.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+			dropdown.appendChild(option);
+		}
+	}
+}
+
+async function runCode(): Promise<void> {
 	request.source = editor.getValue();
 	const outputElement = document.getElementById("output");
+	const runCodeButton = document.getElementById("run-code") as HTMLInputElement;
+	
 	outputElement.textContent = "";
-
+	runCodeButton.disabled = true;
+	
 	fetch(executionURL, 
 	{
 		method: "POST",
@@ -75,4 +120,7 @@ function runCode(): void {
 	.catch(error => {
 		console.error('Error:', error);
 	});
+	
+	await new Promise(resolve => setTimeout(resolve, 1500));
+	runCodeButton.disabled = false;
 }
