@@ -13,20 +13,26 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "server.js",
+  "main": "./dist/server.js",
   "scripts": {
-    "setup": "npm ci",
-    "compile": "tsc",
-    "test": "",
-    "server": "node server.js",
-    "start": "npm run compile && npm run server"
+    "clean-install": "npm ci",
+    "setup": "npm install",
+    "win-build": "npm run setup && tsc && robocopy views dist/views /E && robocopy config dist/config .env",
+    "start": "node ./dist/server.js",
+    "win-build & start": "npm run win-build && npm run start",
+    "test": ""
   },
   "dependencies": {
     "@types/ace": "^0.0.52",
     "@types/dotenv": "^6.1.1",
+    "@types/node": "^22.13.9",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "pg": "^8.13.3",
+    "postgres": "^3.4.5",
+    "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
+    "typeorm": "^0.3.21",
     "typescript": "^5.7.3"
   }
 }
