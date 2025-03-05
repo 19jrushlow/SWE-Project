@@ -18,7 +18,8 @@
     "clean-install": "npm ci",
     "setup": "npm install",
     "build": "npm run setup && tsc && robocopy views dist/views /E && robocopy config dist/config .env",
-    "start": "npm run build && node ./dist/server.js",
+    "start": "node ./dist/server.js",
+    "build & start": "npm run build && npm run start",
     "test": ""
   },
   "dependencies": {
