@@ -1,12 +1,21 @@
 {
 	"compilerOptions": {
-	  "module": "system",
-	  "skipLibCheck": true,
-	  "noImplicitAny": true,
-	  "removeComments": true,
-	  "preserveConstEnums": true,
-	  "sourceMap": true,
-	},
-	"include": ["**/*"],
-	"exclude": ["node_modules"]
-  }
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"module": "commonjs",
+	"skipLibCheck": true,
+	"noUnusedLocals": false,
+	"noImplicitAny": true,
+	"removeComments": true,
+	"preserveConstEnums": true,
+	"sourceMap": true,
+	"allowJs": true,
+	"checkJs": false,
+	"outDir": "./dist",
+  },
+  "include": ["**/*"],
+  "exclude": [
+		"node_modules",
+		"./dist/**/*"
+	]
+}
