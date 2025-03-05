@@ -18,7 +18,8 @@
     "setup": "npm ci",
     "compile": "tsc",
     "test": "",
-    "server": "node server.js"
+    "server": "node server.js",
+    "start": "npm run compile && npm run server"
   },
   "dependencies": {
     "@types/ace": "^0.0.52",
