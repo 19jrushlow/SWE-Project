@@ -61,7 +61,6 @@ async function fetchIDE() {
 }
 
 function loadIDEScripts() {
-    // Create script tag for ace.js
     const aceScript = document.createElement('script');
 	const ideScript = document.createElement('script');
 	
