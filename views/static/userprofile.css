@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+#userProfile {
+    margin-bottom: 25px;
+}
+
+#userProfile p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+#userProfile strong {
+    color: #333;
+}
+
+#editProfileLink {
+    display: inline-block;
+    color: #2196F3;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+#editProfileLink:hover {
+    text-decoration: underline;
+}
+
+#logoutButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#logoutButton:hover {
+    background-color: #d32f2f;
+}

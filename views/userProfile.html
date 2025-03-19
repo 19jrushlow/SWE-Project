@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/userprofile.css">
+    <script src="/navbar.js"></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div id="userProfile">
+            <p><strong>ID:</strong> <span id="userId"></span></p>    
+            <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        </div>
+        <a id="editProfileLink" href="">Edit Profile</a>
+        <button id="logoutButton">Logout</button>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            console.log("Fetching user session data...");
+    
+            const response = await fetch("/api/user/session");
+    
+            if (response.ok) {
+                const user = await response.json();
+                console.log("User data fetched:", user); 
+    
+                document.getElementById("userId").textContent = user.id;
+    
+                if (user.email) {
+                    document.getElementById("userEmail").textContent = user.email;
+                } else {
+                    console.warn("No email found in API response.");
+                }
+            } else {
+                console.warn("User not logged in");
+            }
+        });
+    </script>
+       
+</body>
+</html>
