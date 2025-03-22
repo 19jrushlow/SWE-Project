@@ -1,3 +1,6 @@
+import * as achievementLoader from "./services/achievementloader"
+import * as problemLoader from "./services/problemloader"
+
 const express = require('express');
 const { Request: ExpressRequest, Response: ExpressResponse } = require('express');
 const path = require('path');
@@ -20,10 +23,17 @@ const { User } = require('./models/user');
 const config = require('./config/config.js');
 const port = config.port;
 
+
 // Initialize Database
 AppDataSource.initialize()
     .then(() => {
         console.log("DB connection success");
+
+        // Load/sync achievements
+        achievementLoader.loadAchievementDirectory("./assets/achievements/data")
+
+        // Load/sync problems
+        problemLoader.loadProblemDirectory("./assets/problems")
     })
     .catch((error: any) => {
         console.error("Database connection error:", error);
