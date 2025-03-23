@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { UserAchievement } from "./user-achievement"
+import { UserProblem } from "./user-problem"
 
 @Entity()
 export class User {
@@ -14,4 +15,7 @@ export class User {
 
 	@OneToMany(() => UserAchievement, userAchievement => userAchievement.userId)
 	public userAchievements: UserAchievement[];
+
+	@OneToMany(() => UserProblem, userProblem => userProblem.userId)
+	public userProblems: UserProblem[];
 }

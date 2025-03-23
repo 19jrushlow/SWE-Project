@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, OneToMany } from "typeorm";
+import { UserProblem } from "./user-problem"
 
 export type ProblemData = {
 	title: string; 
@@ -14,4 +15,6 @@ export class Problem {
 	@Column()
 	category: string
 
+	@OneToMany(() => UserProblem, userProblem => userProblem.problemId)
+		public userProblems: UserProblem[];
 }

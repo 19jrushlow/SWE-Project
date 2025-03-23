@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from "typeorm";
 import { User } from "./user"
-import { Achievement } from "./achievement"
+import { Problem } from "./problem"
 
 @Entity()
-export class UserAchievement {
+export class UserProblem {
 	@PrimaryGeneratedColumn()
 	public id: number
 
@@ -11,14 +11,14 @@ export class UserAchievement {
 	public userId: number
 
 	@Column()
-	public achievementId: string
+	public problemId: string
 
 	@CreateDateColumn({ name: 'dateReceived', type: 'timestamp' })
 	public dateReceived: Date;
 
-	@ManyToOne(() => User, (user) => user.userAchievements)
+	@ManyToOne(() => User, (user) => user.userProblems)
 	public user: User
 
-	@ManyToOne(() => Achievement, (achievement) => achievement.userAchievements)
-	public achievement: Achievement
+	@ManyToOne(() => Problem, (problem) => problem.userProblems)
+	public problem: Problem
 }
