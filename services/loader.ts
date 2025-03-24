@@ -26,6 +26,8 @@ async function uploadAchievements(path: string) {
 		// Prepare the achievement data from the JSON
 		const achievementEntity = new Achievement()
 		achievementEntity.id = achievementData.id;
+		achievementEntity.requirementType = achievementData.requirementType;
+		achievementEntity.requirementCount = achievementData.requirementCount;
 
 		await achievementRepository.save(achievementEntity);
 		console.log("Achievement saved successfully!", achievementEntity);

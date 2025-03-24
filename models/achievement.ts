@@ -6,12 +6,20 @@ export type AchievementData = {
 	title: string;
 	description: string;
 	image: string;
+	requirementType: string;
+	requirementCount: number;
 }
 
 @Entity()
 export class Achievement {
 	@PrimaryColumn()
 	id: string
+
+	@Column()
+	requirementType: string
+	
+	@Column()
+	requirementCount: number
 
 	@OneToMany(() => UserAchievement, userAchievement => userAchievement.achievementId)
 	public userAchievements: UserAchievement[];

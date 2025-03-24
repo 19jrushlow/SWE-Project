@@ -16,5 +16,5 @@ export class Problem {
 	category: string
 
 	@OneToMany(() => UserProblem, userProblem => userProblem.problemId)
-		public userProblems: UserProblem[];
+	public userProblems: UserProblem[];
 }

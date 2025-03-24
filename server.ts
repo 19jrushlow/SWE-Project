@@ -1,4 +1,5 @@
 import * as Loader from "./services/loader"
+import * as ProgressTracker from "./services/progresstracker"
 
 const express = require('express');
 const { Request: ExpressRequest, Response: ExpressResponse } = require('express');
