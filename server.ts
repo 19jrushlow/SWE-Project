@@ -1,3 +1,6 @@
+import * as Loader from "./services/loader"
+import * as ProgressTracker from "./services/progresstracker"
+
 const express = require('express');
 const { Request: ExpressRequest, Response: ExpressResponse } = require('express');
 const path = require('path');
@@ -20,10 +23,17 @@ const { User } = require('./models/user');
 const config = require('./config/config.js');
 const port = config.port;
 
+
 // Initialize Database
 AppDataSource.initialize()
     .then(() => {
         console.log("DB connection success");
+
+        // Load/sync achievements
+        Loader.loadAllAchievements("./assets/achievements/data");
+
+        // Load/sync problems
+        Loader.loadAllProblems("./assets/problems");
     })
     .catch((error: any) => {
         console.error("Database connection error:", error);

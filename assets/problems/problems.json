@@ -1,10 +1,12 @@
 {
 	"test_problem1": {
 		"title": "test 1",
+		"category": "test",
 		"content": "this is a test problem"
 	},
 	"test_problem2": {
 		"title": "test 2",
+		"category": "test",
 		"content": "this is another test problem"
 	}
 }

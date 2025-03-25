@@ -7,6 +7,6 @@ module.exports = {
 	},
 	
 	getProblems: (req, res)=>{
-		res.sendFile(path.join( __dirname, "..", "problems", "problems.json"));
+		res.sendFile(path.join( __dirname, "..", "assets", "problems", "problems.json"));
 	}
 }
