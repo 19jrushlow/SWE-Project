@@ -15,6 +15,7 @@ const loginRoutes = require('./routes/login');
 const problemRoutes = require('./routes/problem');
 const signUpRoutes = require('./routes/signup'); 
 const userProfileRoutes = require('./routes/userprofile');
+const sandboxRoutes = require('./routes/sandbox');
 
 const AppDataSource = require('./models/data-source').default;
 const { User } = require('./models/user');
@@ -60,6 +61,7 @@ app.use('/', loginRoutes);
 app.use('/IDE', IDERoutes);
 app.use('/', userProfileRoutes);
 app.use(problemRoutes);
+app.use(sandboxRoutes)
 
 // API to Get User Session
 app.get('/api/user/session', async (req: typeof ExpressRequest, res: typeof ExpressResponse) => {
