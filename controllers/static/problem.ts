@@ -3,7 +3,9 @@ interface Problem {
     content: string;
 }
 
-loadProblem();
+if(window.location.pathname == '/problem') {
+	loadProblem();
+}
 fetchIDE();
 
 
