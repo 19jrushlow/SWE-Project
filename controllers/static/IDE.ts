@@ -6,11 +6,16 @@ interface Filters {
 	execute: boolean;
 }
 
+interface ExecuteParameters {
+	stdin: string;
+}
+
 interface CompilerRequest {
 	compiler: string;
 	options: {
 		compilerOptions: CompilerOptions;
 		filters: Filters;
+		executeParameters?: ExecuteParameters;
 	};
 	lang: string;
 	allowStoreCodeDebug: boolean;
@@ -94,6 +99,7 @@ function populateLanguageDropdown() {
 
 async function runCode(): Promise<void> {
 	request.source = editor.getValue();
+	request.options.executeParameters = {stdin: (document.getElementById("input-text") as HTMLTextAreaElement).value};
 	const outputElement = document.getElementById("output");
 	const runCodeButton = document.getElementById("run-code") as HTMLInputElement;
 	
