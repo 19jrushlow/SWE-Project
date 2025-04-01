@@ -6,7 +6,7 @@
 	height: 500px;
 }
 
-#interaction-container {
+.interaction-container {
 	display: flex;
 	gap: 10px;
 	

@@ -35,17 +35,19 @@ async function loadProblem() {
 			document.getElementById('content').innerHTML = problem.content;
 			
 			// add test cases
-			const test_container = document.getElementById('test-cases') as HTMLElement;
-			const table = document.createElement('table');
+			const table = document.getElementById('test-case-table') as HTMLElement;
 			
 			const headerRow = document.createElement('tr');
 			const inputHeader = document.createElement('th');
 			inputHeader.textContent = 'Input';
-			const outputHeader = document.createElement('th');
-			outputHeader.textContent = 'Output';
+			const expectedOutputHeader = document.createElement('th');
+			expectedOutputHeader.textContent = 'Expected Output';
+			const userOutputHeader = document.createElement('th');
+			userOutputHeader.textContent = 'User Output';
 			
 			headerRow.appendChild(inputHeader);
-			headerRow.appendChild(outputHeader);
+			headerRow.appendChild(expectedOutputHeader);
+			headerRow.appendChild(userOutputHeader);
 			table.appendChild(headerRow);
 			
 			for (let i = 0; i < problem.tests.inputs.length; i++) {
@@ -54,16 +56,15 @@ async function loadProblem() {
 				const inputCell = document.createElement('td');
 				inputCell.textContent = problem.tests.inputs[i];
 
-				const outputCell = document.createElement('td');
-				outputCell.textContent = problem.tests.outputs[i];
+				const expectedOutputCell = document.createElement('td');
+				expectedOutputCell.textContent = problem.tests.outputs[i];
 
 				row.appendChild(inputCell);
-				row.appendChild(outputCell);
+				row.appendChild(expectedOutputCell);
+				row.appendChild(document.createElement('td'));
 
-				table.appendChild(row);
+				table.appendChild(row);	
 			}
-			
-			test_container.appendChild(table);
 			
 		} catch (error) {
 			console.error('Error loading data:', error);
