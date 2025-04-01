@@ -101,12 +101,7 @@ async function runCode(input: string, target: HTMLElement, trimCredits: boolean)
 	request.source = editor.getValue();
 	request.options.executeParameters = {stdin: input};
 	
-	const executionButtons = document.getElementsByClassName('execution-request');
-	
 	target.textContent = "";
-	for (var i = 0; i < executionButtons.length; i++) {
-		(executionButtons[i] as HTMLButtonElement).disabled = true;
-	}
 	
 	fetch(executionURL, 
 	{
@@ -131,22 +126,38 @@ async function runCode(input: string, target: HTMLElement, trimCredits: boolean)
 	.catch(error => {
 		console.error('Error:', error);
 	});
+}
+
+async function runUserCode() {
+	const executionButtons = document.getElementsByClassName('execution-request');
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = true;
+	}
 	
+	await runCode((document.getElementById('input-text') as HTMLTextAreaElement).value, document.getElementById('output'), false);
 	await new Promise(resolve => setTimeout(resolve, 1500));
 	for (var i = 0; i < executionButtons.length; i++) {
 		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
 }
 
-function runUserCode() {
-	runCode((document.getElementById('input-text') as HTMLTextAreaElement).value, document.getElementById('output'), false);
-}
-
-function runTests() {
+async function runTests() {
+	const executionButtons = document.getElementsByClassName('execution-request');
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = true;
+	}
+	
 	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
+	var promises = [];
 	for (var i = 1, row; row = testTable.rows[i]; i++) {
 		const input = row.cells[0].textContent;
 		const target = row.cells[2];
-		runCode(input, target, true);
+		promises.push(runCode(input, target, true));
+	}
+	
+	await Promise.allSettled(promises);
+	await new Promise(resolve => setTimeout(resolve, 1500));
+	for (var i = 0; i < executionButtons.length; i++) {
+		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
 }
