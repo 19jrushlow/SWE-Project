@@ -5,12 +5,13 @@ import { User } from "../models/user"
 const AppDataSource = require('../models/data-source').default;
 const bcrypt = require('bcryptjs');
 
-export async function createDummyUser(email: string, password: string) {
+export async function createDummyUser(email: string, password: string, username: string) {
 	const userRepository = AppDataSource.getRepository(User);
 	const userEntity = new User()
 	userEntity.email = email;
 	const hashedPassword = await bcrypt.hash(password, 10);
 	userEntity.password = hashedPassword;
+	userEntity.username = username;
 
 	await userRepository.save(userEntity);
 	console.log("Dummy user saved successfully!", userEntity);
