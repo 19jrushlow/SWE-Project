@@ -37,19 +37,6 @@ async function loadProblem() {
 			// add test cases
 			const table = document.getElementById('test-case-table') as HTMLElement;
 			
-			const headerRow = document.createElement('tr');
-			const inputHeader = document.createElement('th');
-			inputHeader.textContent = 'Input';
-			const expectedOutputHeader = document.createElement('th');
-			expectedOutputHeader.textContent = 'Expected Output';
-			const userOutputHeader = document.createElement('th');
-			userOutputHeader.textContent = 'User Output';
-			
-			headerRow.appendChild(inputHeader);
-			headerRow.appendChild(expectedOutputHeader);
-			headerRow.appendChild(userOutputHeader);
-			table.appendChild(headerRow);
-			
 			for (let i = 0; i < problem.tests.inputs.length; i++) {
 				const row = document.createElement('tr');
 
