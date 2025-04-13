@@ -6,6 +6,11 @@ interface Problem {
 		inputs: string[];
 		outputs: string[];
 	};
+	solution: {
+		lang: string;
+		code: string;
+		explanation: string;
+	}
 }
 
 if(window.location.pathname == '/problem') {
@@ -37,19 +42,6 @@ async function loadProblem() {
 			// add test cases
 			const table = document.getElementById('test-case-table') as HTMLElement;
 			
-			const headerRow = document.createElement('tr');
-			const inputHeader = document.createElement('th');
-			inputHeader.textContent = 'Input';
-			const expectedOutputHeader = document.createElement('th');
-			expectedOutputHeader.textContent = 'Expected Output';
-			const userOutputHeader = document.createElement('th');
-			userOutputHeader.textContent = 'User Output';
-			
-			headerRow.appendChild(inputHeader);
-			headerRow.appendChild(expectedOutputHeader);
-			headerRow.appendChild(userOutputHeader);
-			table.appendChild(headerRow);
-			
 			for (let i = 0; i < problem.tests.inputs.length; i++) {
 				const row = document.createElement('tr');
 
@@ -66,12 +58,34 @@ async function loadProblem() {
 				table.appendChild(row);	
 			}
 			
+			// insert solution
+			const solutionDiv = document.getElementById("solution");
+			if (solutionDiv) {
+				const langElement = document.createElement("p");
+				langElement.textContent = problem.solution.lang;
+				solutionDiv.appendChild(langElement);
+				
+				const codeElement = document.createElement("pre");
+				codeElement.textContent = problem.solution.code;
+				solutionDiv.appendChild(codeElement);
+				
+				const explanationElement = document.createElement("pre");
+				explanationElement.id = "explanation";
+				explanationElement.textContent = problem.solution.explanation;
+				solutionDiv.appendChild(explanationElement);
+			}
+			
 		} catch (error) {
 			console.error('Error loading data:', error);
 		}
 	} else {
 		console.error('No problemID in the URL path');
 	}
+}
+
+function revealSolution() {
+	const element = document.getElementById('solution');
+	element.style.display = 'block';
 }
 
 async function fetchIDE() {

@@ -6,6 +6,11 @@
 		"tests": {
 			"inputs": [""],
 			"outputs": ["Hello world!"]
+		},
+		"solution": {
+			"lang": "python",
+			"code": "print(\"Hello world!\")",
+			"explanation": "this code prints \"Hello world!\""
 		}
 	},
 	"test_problem2": {
@@ -15,6 +20,11 @@
 		"tests": {
 			"inputs": ["test case 1", "test case 2"],
 			"outputs": ["test case 1", "test case 2"]
+		},
+		"solution": {
+			"lang": "python",
+			"code": "print(input())",
+			"explanation": "this code takes an input from the user and prints it"
 		}
 	}
 }

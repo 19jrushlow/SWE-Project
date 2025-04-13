@@ -16,8 +16,15 @@
 	<div id="test-cases">	
 		<p>Test Cases</p>
 		<button id = "run-tests" class="execution-request" type="button" onclick="runTests()">run tests</button>
-		<table id="test-case-table"></table>
+		<table id="test-case-table">
+			<tr>
+				<th>Input</th><th>Expected Output</th><th>User Output</th>
+			</tr>
+		</table>
 	</div>
+	<br>
+	<button onclick="revealSolution()" type="button">show solution</button>
+	<div id="solution" style="display: none;"></div>
 	<script src="problem.js"></script>
 </body>
 </html>
