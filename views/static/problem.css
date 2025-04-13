@@ -10,3 +10,12 @@
 #test-cases table tr td:hover {
 	background-color: #EEEEEE;
 }
+
+#solution {
+	border: 1px solid #AAAAAA;
+	width: 900px
+}
+
+#explanation {
+	color: lime;
+}

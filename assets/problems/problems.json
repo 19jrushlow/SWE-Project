@@ -9,7 +9,8 @@
 		},
 		"solution": {
 			"lang": "python",
-			"code": "print(\"Hello world!\")"
+			"code": "print(\"Hello world!\")",
+			"explanation": "this code prints \"Hello world!\""
 		}
 	},
 	"test_problem2": {
@@ -22,7 +23,8 @@
 		},
 		"solution": {
 			"lang": "python",
-			"code": "print(input())"
+			"code": "print(input())",
+			"explanation": "this code takes an input from the user and prints it"
 		}
 	}
 }

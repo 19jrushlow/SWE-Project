@@ -6,6 +6,11 @@ interface Problem {
 		inputs: string[];
 		outputs: string[];
 	};
+	solution: {
+		lang: string;
+		code: string;
+		explanation: string;
+	}
 }
 
 if(window.location.pathname == '/problem') {
@@ -53,12 +58,34 @@ async function loadProblem() {
 				table.appendChild(row);	
 			}
 			
+			// insert solution
+			const solutionDiv = document.getElementById("solution");
+			if (solutionDiv) {
+				const langElement = document.createElement("p");
+				langElement.textContent = problem.solution.lang;
+				solutionDiv.appendChild(langElement);
+				
+				const codeElement = document.createElement("pre");
+				codeElement.textContent = problem.solution.code;
+				solutionDiv.appendChild(codeElement);
+				
+				const explanationElement = document.createElement("pre");
+				explanationElement.id = "explanation";
+				explanationElement.textContent = problem.solution.explanation;
+				solutionDiv.appendChild(explanationElement);
+			}
+			
 		} catch (error) {
 			console.error('Error loading data:', error);
 		}
 	} else {
 		console.error('No problemID in the URL path');
 	}
+}
+
+function revealSolution() {
+	const element = document.getElementById('solution');
+	element.style.display = 'block';
 }
 
 async function fetchIDE() {
