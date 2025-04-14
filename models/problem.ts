@@ -4,7 +4,7 @@ import { UserProblem } from "./user-problem"
 export type ProblemData = {
 	title: string; 
 	category: string;
-	content: string;
+	difficulty: string;
 }
 
 @Entity()
@@ -13,7 +13,13 @@ export class Problem {
 	id: string
 
 	@Column()
+	title: string
+
+	@Column()
 	category: string
+
+	@Column()
+	difficulty: string
 
 	@OneToMany(() => UserProblem, userProblem => userProblem.problemId)
 	public userProblems: UserProblem[];
