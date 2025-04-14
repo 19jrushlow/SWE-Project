@@ -39,6 +39,21 @@ const bindings: { [key: string]: languageBinding } = {
 		compilerLanguageID: "c++",
 		aceLanguageID: "c_cpp",
 		compilerID: "g82"
+	},
+	rust: {
+		compilerLanguageID: "rust",
+		aceLanguageID: "rust",
+		compilerID: "r1850"
+	},
+	javaScript: {
+		compilerLanguageID: "javascript",
+		aceLanguageID: "javascript",
+		compilerID: "v8113"
+	},
+	cSharp: {
+		compilerLanguageID: "csharp",
+		aceLanguageID: "csharp",
+		compilerID: "dotnettrunkcsharp"
 	}
 };
 
