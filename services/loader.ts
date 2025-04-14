@@ -66,7 +66,9 @@ async function uploadProblems(path: string) {
 			// Prepare the problem data from the JSON
 			const problemEntity = new Problem()
 			problemEntity.id = problemName;
+			problemEntity.title = castProblem.title;
 			problemEntity.category = castProblem.category;
+			problemEntity.difficulty = castProblem.difficulty;
 
 			await problemRepository.save(problemEntity);
 			console.log("Problem saved successfully!", problemEntity);
