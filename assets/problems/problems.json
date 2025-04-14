@@ -29,7 +29,7 @@
 			"explanation": "this code takes an input from the user and prints it"
 		}
 	},
-	"000001": {
+	"1": {
 		"title": "Bubble Sort",
 		"category": "normal",
 		"tags": ["Easy", "Sorting"],
