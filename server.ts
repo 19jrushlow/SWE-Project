@@ -68,7 +68,7 @@ app.use(problemRoutes);
 app.use(sandboxRoutes)
 
 // API to Get User Session
-app.get('/api/user/session', async (req, res) => {
+app.get('/api/user/session', async (req: typeof ExpressRequest, res: typeof ExpressResponse) => {
     if (!req.session || !req.session.userId) {
       return res.status(401).json({ error: 'User not logged in' });
     }
@@ -90,7 +90,7 @@ app.get('/api/user/session', async (req, res) => {
         relations: ["achievement"]
       });
   
-      const achievements = userAchievements.map(ua => ua.achievement);
+      const achievements = userAchievements.map((ua: UserAchievement) => ua.achievement);
   
       // Step 3: Return everything together
       res.json({
