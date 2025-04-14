@@ -7,6 +7,11 @@ const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser'); 
 const app = express();
+declare module 'express-session' {
+    interface SessionData {
+      userId?: number;
+    }
+  }
 
 // Import Routes
 const homeRoutes = require('./routes/home');
