@@ -50,7 +50,7 @@ const bindings: { [key: string]: languageBinding } = {
 		aceLanguageID: "javascript",
 		compilerID: "v8113"
 	},
-	cSharp: {
+	"c#": {
 		compilerLanguageID: "csharp",
 		aceLanguageID: "csharp",
 		compilerID: "dotnettrunkcsharp"
