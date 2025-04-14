@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="/userprofile.css">
-    <script src="/navbar.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/userprofile.css" />
+  <script src="/navbar.js"></script>
 </head>
 <body>
-    <div id="navbar-container"></div>
-    <div class="container">
-        <h1>User Profile</h1>
-        <div id="userProfile">
-            <p><strong>ID:</strong> <span id="userId"></span></p>    
-            <p><strong>Email:</strong> <span id="userEmail"></span></p>
-        </div>
-        <a id="editProfileLink" href="">Edit Profile</a>
-        <button id="logoutButton">Logout</button>
+  <div id="navbar-container"></div>
+  <div class="container">
+    <h1>User Profile</h1>
+
+    <div id="userProfile">
+      <p><strong>Username:</strong> <span id="userId"></span></p>
+      <p><strong>Email:</strong> <span id="userEmail"></span></p>
     </div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", async function () {
-            console.log("Fetching user session data...");
-    
-            const response = await fetch("/api/user/session");
-    
-            if (response.ok) {
-                const user = await response.json();
-                console.log("User data fetched:", user); 
-    
-                document.getElementById("userId").textContent = user.id;
-    
-                if (user.email) {
-                    document.getElementById("userEmail").textContent = user.email;
-                } else {
-                    console.warn("No email found in API response.");
-                }
-            } else {
-                console.warn("User not logged in");
-            }
+
+    <div id="achievements">
+      <h3>Achievements</h3>
+      <ul id="achievementList"></ul>
+    </div>
+
+    <a id="editProfileLink" href="/user/edit">Edit Profile</a>
+    <button id="logoutButton">Logout</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      const response = await fetch("/api/user/session");
+
+      if (response.ok) {
+        const user = await response.json();
+
+        // Set username and email
+        document.getElementById("userId").textContent = user.username || user.id;
+        document.getElementById("userEmail").textContent = user.email || "Not provided";
+
+        // Display achievements
+        const achievementList = document.getElementById("achievementList");
+        if (Array.isArray(user.achievements) && user.achievements.length > 0) {
+          user.achievements.forEach((achievement) => {
+            const li = document.createElement("li");
+            li.textContent = achievement.title || achievement.name || "Unnamed Achievement";
+            achievementList.appendChild(li);
+          });
+        } else {
+          achievementList.innerHTML = "<li>No achievements yet.</li>";
+        }
+      }
+
+      // Logout handler
+      document.getElementById("logoutButton").addEventListener("click", async () => {
+        const res = await fetch("/logout", {
+          method: "POST",
+          credentials: "same-origin"
         });
-    </script>
-       
+
+        if (res.redirected) {
+          window.location.href = res.url;
+        } else {
+          alert("Logout failed.");
+        }
+      });
+    });
+  </script>
 </body>
 </html>

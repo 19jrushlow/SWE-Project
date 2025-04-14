@@ -12,7 +12,7 @@ router.get('/user/:id', async (req, res) => {
         }
 
         const userId = req.session.userId; // Get user from session
-        console.log(`🔹 Fetching profile for user ID: ${userId}`);
+        console.log(`Fetching profile for user ID: ${userId}`);
 
         if (userId != req.params.id) {
             return res.status(403).send("Unauthorized access");

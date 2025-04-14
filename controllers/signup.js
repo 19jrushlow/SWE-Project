@@ -10,22 +10,23 @@ module.exports = {
 
     postSignup: async (req, res) => {
         try {
-            console.log("Received Request Body:", req.body);  
+            const { username, email, password } = req.body;
 
-            const { email, password } = req.body;
-
-            if (!email || !password) {
-                console.error("Missing email or password");
+            if (!username || !email || !password) {
                 return res.status(400).send("Missing required fields");
             }
 
             const hashedPassword = await bcrypt.hash(password, 10);
-            
+
             const userRepository = AppDataSource.getRepository(User);
-            const newUser = userRepository.create({ email, password: hashedPassword });
+            const newUser = userRepository.create({
+                username,
+                email,
+                password: hashedPassword
+            });
+
             await userRepository.save(newUser);
 
-            console.log("User saved successfully!", newUser);
             req.session.userId = newUser.id;
             res.redirect(`/user/${newUser.id}`);
         } catch (error) {
