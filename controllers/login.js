@@ -10,28 +10,21 @@ module.exports = {
 
     postLogin: async (req, res) => {
         try {
-            console.log("Received Login Request:", req.body);
+            const { username, password } = req.body;
 
             const userRepository = AppDataSource.getRepository(User);
-            const { email, password } = req.body;
+            const user = await userRepository.findOneBy({ username });
 
-            // Check if user exists
-            const user = await userRepository.findOneBy({ email });
             if (!user) {
-                console.error("Invalid username or password");
-                return res.status(400).send('Invalid email or password');
+                return res.status(400).send('Invalid username or password');
             }
 
-            // Check password
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                console.error("Invalid password");
-                return res.status(400).send('Invalid email or password');
+                return res.status(400).send('Invalid username or password');
             }
 
-            // Set session
             req.session.userId = user.id;
-            console.log(`Login successful for User ID: ${user.id}`);
             res.redirect(`/user/${user.id}`);
         } catch (error) {
             console.error('Login error:', error);
