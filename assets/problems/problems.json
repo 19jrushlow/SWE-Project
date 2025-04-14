@@ -2,6 +2,7 @@
 	"test_problem1": {
 		"title": "test problem 1",
 		"category": "test",
+		"difficulty": "Easy",
 		"content": "print the string \"Hello world!\"",
 		"tests": {
 			"inputs": [""],
@@ -16,6 +17,7 @@
 	"test_problem2": {
 		"title": "test problem 2",
 		"category": "test",
+		"difficulty": "Easy",
 		"content": "print out a string that is inputted by the user",
 		"tests": {
 			"inputs": ["test case 1", "test case 2"],
