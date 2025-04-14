@@ -1,8 +1,8 @@
 import * as Loader from "./services/loader"
 import * as ProgressTracker from "./services/progresstracker"
+import { Request, Response } from 'express';
 
 const express = require('express');
-const { Request: ExpressRequest, Response: ExpressResponse } = require('express');
 const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser'); 
@@ -68,7 +68,7 @@ app.use(problemRoutes);
 app.use(sandboxRoutes)
 
 // API to Get User Session
-app.get('/api/user/session', async (req: typeof ExpressRequest, res: typeof ExpressResponse) => {
+app.get('/api/user/session', async (req: Request, res: Response) => {
     if (!req.session || !req.session.userId) {
       return res.status(401).json({ error: 'User not logged in' });
     }
@@ -106,7 +106,7 @@ app.get('/api/user/session', async (req: typeof ExpressRequest, res: typeof Expr
   });
 
 // Logout Route
-app.post('/logout', (req: typeof ExpressRequest, res: typeof ExpressResponse) => {
+app.post('/logout', (req: Request, res: Response) => {
     req.session.destroy((error: any) => {
         if (error) {
             return res.status(500).json({ error: 'Logout failed' });
