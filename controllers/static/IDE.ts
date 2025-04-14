@@ -160,4 +160,49 @@ async function runTests() {
 	for (var i = 0; i < executionButtons.length; i++) {
 		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
+
+	await checkTests();
+}
+
+async function checkTests() {
+	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
+
+	// check for completion
+	let anyWrong: boolean = false;
+	for (var i = 1, row; row = testTable.rows[i]; i++) {
+		// Doing this because its easy right now, but want to note here that it's possible to cheese completion via inspecting element and changing the expected output.
+		// Solution would be to pull the expected output from the JSON, will change this later if I have time
+		const expectedOutput = row.cells[1].textContent;
+		const userOutput = row.cells[2].textContent;
+		if (userOutput.trim() != expectedOutput.trim()) {
+			console.log("Incorrect! Expected: " + expectedOutput + " User: " + userOutput);
+			anyWrong = true;
+		}
+	}
+
+	// none were wrong, call API to mark the problem as complete for the user
+	if (!anyWrong) {
+		const response = await fetch("/api/user/session");
+
+      if (response.ok) {
+		const user = await response.json();
+		const urlParams = new URLSearchParams(window.location.search);
+		const problemId = urlParams.get('problemID');
+		const userId: number = user.id
+		
+		await fetch('/api/progresstracker/markProblem', {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+			  userId,
+			  problemId,
+			}),
+		  });
+
+      } else {
+		console.log("Guest completed a problem successfully");
+	  }
+	}
 }
