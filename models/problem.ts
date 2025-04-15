@@ -3,8 +3,7 @@ import { UserProblem } from "./user-problem"
 
 export type ProblemData = {
 	title: string; 
-	category: string;
-	difficulty: string;
+	tags: string[];
 }
 
 @Entity()

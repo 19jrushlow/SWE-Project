@@ -6,35 +6,57 @@
   <title>Problems</title>
   <link rel="stylesheet" href="/problemset.css"> 
   <script src="/navbar.js"></script>
-  <script src="/problemset.js"></script>
 </head>
 <body>
 	<div id="navbar-container"></div>
 	<br>
 	<h1>Problems</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Status</th>
-				<th>Title</th>
-				<th>Category</th>
-				<th>Difficulty</th>
-			</tr>
-		</thead>
-		<tbody id="problemsTable">
-			<tr>
-				<td></td>
-				<td><a href="/problem?problemID=test_problem1">test problem 1</a></td>
-				<td>test</td>
-				<td>easy</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><a href="/problem?problemID=test_problem2">test problem 2</a></td>
-				<td>test</td>
-				<td>easy</td>
-			</tr>
-		</tbody>
-	</table>
+
+	<div class="problemset">
+		<div class="filter-bar-container">
+			<div class="filter-bar">
+			  <input 
+				type="text" 
+				id="searchInput" 
+				placeholder="Search..." 
+				class="search-input"
+			  />
+		  
+			  <select id="filterStatus" class="filter-dropdown">
+				<option value="">Status</option>
+				<option value="incomplete">Incomplete</option>
+				<option value="complete">Complete</option>
+			  </select>
+		  
+			  <select id="filterCategory" class="filter-dropdown">
+				<option value="">Category</option>
+				<option value="test">Test</option>
+				<option value="sorting">Sorting</option>
+			  </select>
+		  
+			  <select id="filterDifficulty" class="filter-dropdown">
+				<option value="">Difficulty</option>
+				<option value="easy">Easy</option>
+				<option value="medium">Medium</option>
+				<option value="hard">Hard</option>
+			  </select>
+
+			  <button id="searchButton" onclick="applyFilters()" class="search-button">Search</button>
+			</div>
+		  </div>
+	
+		<table>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Title</th>
+					<th>Category</th>
+					<th>Difficulty</th>
+				</tr>
+			</thead>
+			<tbody id="problemsTable"></tbody>
+		</table>
+	</div>
+	<script src="/problemset.js"></script>
 </body>
 </html>

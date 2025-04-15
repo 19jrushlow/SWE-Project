@@ -199,7 +199,7 @@ async function checkTests() {
 	if (!anyWrong) {
 		const response = await fetch("/api/user/session");
 
-      if (response.ok) {
+    	if (response.ok) {
 		const user = await response.json();
 		const urlParams = new URLSearchParams(window.location.search);
 		const problemId = urlParams.get('problemID');

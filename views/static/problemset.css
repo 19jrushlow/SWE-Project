@@ -11,10 +11,48 @@ h1 {
     color: #333;
 }
 
+.problemset {
+    max-width: 800px;
+    margin-left: auto;
+	margin-right: auto;
+}
+
+.filter-bar-container {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .search-input {
+    padding: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .filter-dropdown {
+    padding: 0.5rem;
+  }
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background-color: #575757;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #444;
+}
+
 table {
     border-collapse: collapse;
-	margin-left: auto;
-	margin-right: auto;
     font-size: 0.9em;
     min-width: 800px;
 }
