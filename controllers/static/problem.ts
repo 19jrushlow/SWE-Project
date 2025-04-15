@@ -19,6 +19,7 @@ if(window.location.pathname == '/problem') {
 fetchIDE();
 
 
+// loads everything needed for the problem page based on the problemID
 async function loadProblem() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const problemID = urlParams.get('problemID');
@@ -85,10 +86,10 @@ async function loadProblem() {
 }
 
 function revealSolution() {
-	const element = document.getElementById('solution');
-	element.style.display = 'block';
+	document.getElementById('solution').style.display = 'block';
 }
 
+// embeds the IDE into the page
 async function fetchIDE() {
 	try {
 		const response = await fetch('/IDE');
@@ -116,6 +117,7 @@ async function fetchIDE() {
 	}
 }
 
+// these scripts are needed for IDE functionality
 function loadIDEScripts() {
     const aceScript = document.createElement('script');
 	const ideScript = document.createElement('script');

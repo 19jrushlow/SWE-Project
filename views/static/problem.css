@@ -8,7 +8,7 @@
 }
 
 #test-cases table tr td:hover {
-	background-color: #EEEEEE;
+	background-color: rgba(200, 200, 200, 0.3);
 }
 
 #solution {

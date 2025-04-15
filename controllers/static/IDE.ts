@@ -73,6 +73,7 @@ let request: CompilerRequest = {
 }
 
 
+// default IDE settings
 const editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 setLanguage("python")
@@ -112,6 +113,7 @@ function populateLanguageDropdown() {
 	}
 }
 
+// input is the input fed to the user's program, target is where to display the result, trimCredits should only be used for test cases to clean the API response
 async function runCode(input: string, target: HTMLElement, trimCredits: boolean): Promise<void> {
 	request.source = editor.getValue();
 	request.options.executeParameters = {stdin: input};
@@ -143,6 +145,7 @@ async function runCode(input: string, target: HTMLElement, trimCredits: boolean)
 	});
 }
 
+// sends user code to compiler explorer API
 async function runUserCode() {
 	const executionButtons = document.getElementsByClassName('execution-request');
 	for (var i = 0; i < executionButtons.length; i++) {
@@ -156,6 +159,7 @@ async function runUserCode() {
 	}
 }
 
+// sends user code to compiler explorer API for each test case
 async function runTests() {
 	const executionButtons = document.getElementsByClassName('execution-request');
 	for (var i = 0; i < executionButtons.length; i++) {
@@ -164,7 +168,8 @@ async function runTests() {
 	
 	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
 	var promises = [];
-	for (var i = 1, row; row = testTable.rows[i]; i++) {
+	for (let i = 1, row; row = testTable.rows[i]; i++) {
+		row.style.backgroundColor = 'transparent';
 		const input = row.cells[0].textContent;
 		const target = row.cells[2];
 		promises.push(runCode(input, target, true));
@@ -172,7 +177,7 @@ async function runTests() {
 	
 	await Promise.allSettled(promises);
 	await new Promise(resolve => setTimeout(resolve, 1500));
-	for (var i = 0; i < executionButtons.length; i++) {
+	for (let i = 0; i < executionButtons.length; i++) {
 		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
 
@@ -195,6 +200,10 @@ async function checkTests() {
 		if (userOutput.trim() != expectedOutput.trim()) {
 			console.log("Incorrect! Expected: " + expectedOutput + " User: " + userOutput);
 			anyWrong = true;
+			row.style.backgroundColor = 'red';
+		}
+		else {
+			row.style.backgroundColor = 'lime';
 		}
 	}
 
