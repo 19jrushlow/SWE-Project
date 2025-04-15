@@ -1,6 +1,6 @@
 interface Problem {
 	title: string;
-	category: string;
+	tags: string[];
 	content: string;
 	tests: {
 		inputs: string[];
@@ -38,6 +38,7 @@ async function loadProblem() {
 			
 			document.getElementById('title').innerHTML = problem.title;
 			document.getElementById('content').innerHTML = problem.content;
+			document.getElementById('tags').innerHTML = problem.tags.join(', ');
 			
 			// add test cases
 			const table = document.getElementById('test-case-table') as HTMLElement;
@@ -55,7 +56,7 @@ async function loadProblem() {
 				row.appendChild(expectedOutputCell);
 				row.appendChild(document.createElement('td'));
 
-				table.appendChild(row);	
+				table.appendChild(row);
 			}
 			
 			// insert solution
