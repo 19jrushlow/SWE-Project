@@ -39,7 +39,7 @@ async function loadProblem() {
 			
 			document.getElementById('title').innerHTML = problem.title;
 			document.getElementById('content').innerHTML = problem.content;
-			document.getElementById('tags').innerHTML = problem.tags.join(', ');
+			document.getElementById('tags').innerHTML = 'Tags: ' + problem.tags.join(', ');
 			
 			// add test cases
 			const table = document.getElementById('test-case-table') as HTMLElement;

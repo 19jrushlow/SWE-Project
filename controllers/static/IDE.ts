@@ -35,7 +35,7 @@ const bindings: { [key: string]: languageBinding } = {
 		aceLanguageID: "python",
 		compilerID: "python313"
 	},
-	cpp: {
+	"c++": {
 		compilerLanguageID: "c++",
 		aceLanguageID: "c_cpp",
 		compilerID: "g82"
