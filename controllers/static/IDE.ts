@@ -176,6 +176,9 @@ async function runTests() {
 		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
 
+	// Wait until the pending changes are completely done updating
+	await new Promise(requestAnimationFrame);
+
 	await checkTests();
 }
 
@@ -200,24 +203,24 @@ async function checkTests() {
 		const response = await fetch("/api/user/session");
 
     	if (response.ok) {
-		const user = await response.json();
-		const urlParams = new URLSearchParams(window.location.search);
-		const problemId = urlParams.get('problemID');
-		const userId: number = user.id
+			const user = await response.json();
+			const urlParams = new URLSearchParams(window.location.search);
+			const problemId = urlParams.get('problemID');
+			const userId: number = user.id
 		
-		await fetch('/api/progresstracker/markProblem', {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-			  userId,
-			  problemId,
-			}),
-		  });
+			await fetch('/api/progresstracker/markProblem', {
+				method: 'POST',
+				headers: {
+			  	'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+			  	userId,
+			  	problemId,
+				}),
+		  	});
 
-      } else {
-		console.log("Guest completed a problem successfully");
-	  }
+      	} else {
+			console.log("Guest completed a problem successfully");
+	  	}
 	}
 }
