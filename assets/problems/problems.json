@@ -1,8 +1,7 @@
 {
 	"test_problem1": {
 		"title": "test problem 1",
-		"category": "test",
-		"tags": ["Easy"],
+		"tags": ["Easy", "Test"],
 		"content": "print the string \"Hello world!\"",
 		"tests": {
 			"inputs": [""],
@@ -16,8 +15,7 @@
 	},
 	"test_problem2": {
 		"title": "test problem 2",
-		"category": "test",
-		"tags": ["Easy"],
+		"tags": ["Easy", "Test"],
 		"content": "print out a string that is inputted by the user",
 		"tests": {
 			"inputs": ["test case 1", "test case 2"],
@@ -31,7 +29,6 @@
 	},
 	"1": {
 		"title": "Bubble Sort",
-		"category": "normal",
 		"tags": ["Easy", "Sorting"],
 		"content": "Write a program that performs bubble sort on a comma-separated list of numbers. Then print out the sorted list, along with the number of passes needed to sort it (including the pass needed to verify that it is sorted).",
 		"tests": {
