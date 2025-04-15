@@ -22,6 +22,10 @@ const signUpRoutes = require('./routes/signup');
 const userEditRoutes = require('./routes/useredit');
 const userProfileRoutes = require('./routes/userprofile');
 const sandboxRoutes = require('./routes/sandbox');
+const problemsetRoutes = require('./routes/problemset');
+const leaderboardRoutes = require('./routes/leaderboard');
+const progressTrackerAPI = require('./routes/progresstracker');
+const searchAPI = require('./routes/search');
 
 const AppDataSource = require('./models/data-source').default;
 const { User } = require('./models/user');
@@ -71,6 +75,12 @@ app.use('/', userEditRoutes);
 app.use('/', userProfileRoutes);
 app.use(problemRoutes);
 app.use(sandboxRoutes)
+app.use('/problemset', problemsetRoutes);
+app.use('/leaderboard', leaderboardRoutes);
+
+// API routes
+app.use('/api/progresstracker', progressTrackerAPI)
+app.use('/api/search', searchAPI)
 
 // API to Get User Session
 app.get('/api/user/session', async (req: Request, res: Response) => {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problems</title>
+  <link rel="stylesheet" href="/problemset.css"> 
+  <script src="/navbar.js"></script>
+</head>
+<body>
+	<div id="navbar-container"></div>
+	<br>
+	<h1>Problems</h1>
+
+	<div class="problemset">
+		<div class="filter-bar-container">
+			<div class="filter-bar">
+			  <input 
+				type="text" 
+				id="searchInput" 
+				placeholder="Search..." 
+				class="search-input"
+			  />
+		  
+			  <select id="filterStatus" class="filter-dropdown">
+				<option value="">Status</option>
+				<option value="incomplete">Incomplete</option>
+				<option value="complete">Complete</option>
+			  </select>
+		  
+			  <select id="filterCategory" class="filter-dropdown">
+				<option value="">Category</option>
+			  </select>
+		  
+			  <select id="filterDifficulty" class="filter-dropdown">
+				<option value="">Difficulty</option>
+			  </select>
+
+			  <button id="searchButton" onclick="applyFilters()" class="search-button">Search</button>
+			</div>
+		  </div>
+	
+		<table>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Title</th>
+					<th>Category</th>
+					<th>Difficulty</th>
+				</tr>
+			</thead>
+			<tbody id="problemsTable"></tbody>
+		</table>
+	</div>
+	<script src="/problemset.js"></script>
+</body>
+</html>
