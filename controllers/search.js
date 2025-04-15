@@ -5,14 +5,14 @@ const path = require('path');
 module.exports = {
 	findProblems: async (req, res)=>{
 		const { searchString, statusFilter, categoryFilter, difficultyFilter, userId } = req.body;
-		userId = parseInt(userId);
+		let parsedUserId = parseInt(userId);
 		console.log("Search API request made for: " + searchString + " " + statusFilter + " " + categoryFilter + " " + difficultyFilter);
 
-		if (userId == -1) { console.log("Guest making a search"); }
+		if (parsedUserId == -1) { console.log("Guest making a search"); }
 		
 		try {
 			// Make the API call to get the problems based on the filters
-			const problemMatches = await Search.findProblems(searchString, statusFilter, categoryFilter, difficultyFilter, userId);
+			const problemMatches = await Search.findProblems(searchString, statusFilter, categoryFilter, difficultyFilter, parsedUserId);
 	  
 			// Send the result back
 			res.json({
