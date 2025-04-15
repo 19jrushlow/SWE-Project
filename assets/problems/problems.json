@@ -16,7 +16,6 @@
 	"test_problem2": {
 		"title": "test problem 2",
 		"tags": ["Easy", "Test"],
-		"difficulty": "Easy",
 		"content": "print out a string that is inputted by the user",
 		"tests": {
 			"inputs": ["test case 1", "test case 2"],
