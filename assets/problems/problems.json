@@ -40,7 +40,7 @@
 		},
 		"solution": {
 			"lang": "python",
-			"code": "# this function performs a single pass of bubble sort\ndef bubble_pass(arr):\n    is_sorted = True\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            arr[i], arr[i + 1] = arr[i + 1], arr[i]\n            is_sorted = False\n    return arr, is_sorted\n\n# this function performs bubble sort\ndef bubble_sort(arr):\n    passes = 0\n    is_sorted = False\n    while(not is_sorted):\n        arr, is_sorted = bubble_pass(arr)\n        passes += 1\n    \n    # print answer\n    print(','.join(str(num) for num in arr))\n    print(passes)\n\n# getting and formatting user input\nunsorted_list = input()\nunsorted_list = unsorted_list.split(',')\n\n# sort and print answer\nbubble_sort(unsorted_list)",
+			"code": "# this function performs a single pass of bubble sort\ndef bubble_pass(arr):\n    is_sorted = True\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            arr[i], arr[i + 1] = arr[i + 1], arr[i]\n            is_sorted = False\n    return arr, is_sorted\n\n# this function performs bubble sort\ndef bubble_sort(arr):\n    passes = 0\n    is_sorted = False\n    while(not is_sorted):\n        arr, is_sorted = bubble_pass(arr)\n        passes += 1\n    \n    # print answer\n    print(','.join(str(num) for num in arr))\n    print(passes)\n\n# getting and formatting user input\nunsorted_list = input()\nunsorted_list = [int(num) for num in unsorted_list.split(',')]\n\n# sort and print answer\nbubble_sort(unsorted_list)\n",
 			"explanation": ""
 		}
 	}
