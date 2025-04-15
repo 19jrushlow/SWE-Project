@@ -187,7 +187,7 @@ async function checkTests() {
 
 	// check for completion
 	let anyWrong: boolean = false;
-	for (var i = 1, row; row = testTable.rows[i]; i++) {
+	for (let i = 1, row; row = testTable.rows[i]; i++) {
 		// Doing this because its easy right now, but want to note here that it's possible to cheese completion via inspecting element and changing the expected output.
 		// Solution would be to pull the expected output from the JSON, will change this later if I have time
 		const expectedOutput = row.cells[1].textContent;

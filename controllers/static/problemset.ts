@@ -117,7 +117,7 @@ async function loadCategories() {
     if (response.ok) {
 		const categories = await response.json();
 		console.log(categories.data);
-		for (var category of categories.data) {
+		for (let category of categories.data) {
 			addOption("filterCategory", category as string)
 		}
     } else {
@@ -130,7 +130,7 @@ async function loadDifficulties() {
     if (response.ok) {
 		const difficulties = await response.json();
 		console.log(difficulties.data);
-		for (var difficulty of difficulties.data) {
+		for (let difficulty of difficulties.data) {
 			addOption("filterDifficulty", difficulty as string)
 		}
     } else {
