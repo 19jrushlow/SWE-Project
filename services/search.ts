@@ -84,3 +84,21 @@ async function checkCompletion(userId: number, problemId: string) {
 		return false;
 	}
 }
+
+export async function getCategories() {
+	const categories = await AppDataSource
+		.getRepository(Problem)
+		.createQueryBuilder("problem")
+		.select("DISTINCT problem.category", "category")
+		.getRawMany();
+	return categories.map((row: { category: string }) => row.category);
+}
+
+export async function getDifficulties() {
+	const difficulties = await AppDataSource
+		.getRepository(Problem)
+		.createQueryBuilder("problem")
+		.select("DISTINCT problem.difficulty", "difficulty")
+		.getRawMany();
+	return difficulties.map((row: { difficulty: string }) => row.difficulty);
+}

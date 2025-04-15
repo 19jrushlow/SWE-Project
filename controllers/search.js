@@ -30,5 +30,37 @@ module.exports = {
 				error: error.message
 			});
 		}
+	},
+
+	getDifficulties: async (req, res)=>{
+		try {
+			let difficulties = await Search.getDifficulties();
+			return res.json({
+				success: true,
+				data: difficulties,
+			});
+		} catch (error) {
+			console.error(error);
+			return res.status(500).json({
+				success: false,
+				message: 'Fetching difficulties failed!',
+			});
+		}
+	},
+
+	getCategories: async (req, res)=>{
+		try {
+			let categories = await Search.getCategories();
+			return res.json({
+				success: true,
+				data: categories,
+			});
+		} catch (error) {
+			console.error(error);
+			return res.status(500).json({
+				success: false,
+				message: 'Fetching categories failed!',
+			});
+		}
 	}
 }

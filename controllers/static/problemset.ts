@@ -112,7 +112,49 @@ async function getUserId() {
 	}
 }
 
+async function loadCategories() {
+	const response = await fetch("/api/search/getCategories");
+    if (response.ok) {
+		const categories = await response.json();
+		console.log(categories.data);
+		for (var category of categories.data) {
+			addOption("filterCategory", category as string)
+		}
+    } else {
+		console.error("Error loading categories!")
+	}
+}
+
+async function loadDifficulties() {
+	const response = await fetch("/api/search/getDifficulties");
+    if (response.ok) {
+		const difficulties = await response.json();
+		console.log(difficulties.data);
+		for (var difficulty of difficulties.data) {
+			addOption("filterDifficulty", difficulty as string)
+		}
+    } else {
+		console.error("Error loading difficulties!")
+	}
+}
+
+function addOption(target: string, content: string) {
+	const targetOption = document.getElementById(target) as HTMLSelectElement;
+    
+    const option = document.createElement("option");
+    option.value = content;
+    option.textContent = content;
+        
+    targetOption.appendChild(option);
+}
+
+async function loadOptions() {
+	loadCategories();
+	loadDifficulties();
+}
+
 window.onload = () => {
+	loadOptions();
 	applyFilters();
   };
   
