@@ -140,12 +140,12 @@ async function loadDifficulties() {
 
 function addOption(target: string, content: string) {
 	const targetOption = document.getElementById(target) as HTMLSelectElement;
-    
-    const option = document.createElement("option");
-    option.value = content;
-    option.textContent = content;
-        
-    targetOption.appendChild(option);
+
+	const option = document.createElement("option");
+	option.value = content;
+	option.textContent = content;
+	
+	targetOption.appendChild(option);
 }
 
 async function loadOptions() {
