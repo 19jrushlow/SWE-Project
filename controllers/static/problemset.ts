@@ -118,6 +118,7 @@ async function loadCategories() {
 		const categories = await response.json();
 		console.log(categories.data);
 		for (let category of categories.data) {
+			if (category.toLowerCase() == "test") { continue; }
 			addOption("filterCategory", category as string)
 		}
     } else {
