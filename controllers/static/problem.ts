@@ -86,7 +86,13 @@ async function loadProblem() {
 }
 
 function revealSolution() {
-	document.getElementById('solution').style.display = 'block';
+	const solutionElement = document.getElementById('solution')
+	if (solutionElement.style.display == 'block') {
+		solutionElement.style.display = 'none';
+	}
+	else {
+		solutionElement.style.display = 'block';
+	}
 }
 
 // embeds the IDE into the page
