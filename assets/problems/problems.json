@@ -8,7 +8,7 @@
 			"outputs": ["Hello world!"]
 		},
 		"solution": {
-			"lang": "python",
+			"lang": "Python",
 			"code": "print(\"Hello world!\")",
 			"explanation": "this code prints \"Hello world!\""
 		}
@@ -22,7 +22,7 @@
 			"outputs": ["test case 1", "test case 2"]
 		},
 		"solution": {
-			"lang": "python",
+			"lang": "Python",
 			"code": "print(input())",
 			"explanation": "this code takes an input from the user and prints it"
 		}
@@ -36,8 +36,8 @@
 			"outputs": ["1,2,3,5,31,61\n3", "0,1,4,8,9\n5", "1,2,3\n1"]
 		},
 		"solution": {
-			"lang": "python",
-			"code": "# this function performs a single pass of bubble sort\ndef bubble_pass(arr):\n    is_sorted = True\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            arr[i], arr[i + 1] = arr[i + 1], arr[i]\n            is_sorted = False\n    return arr, is_sorted\n\n# this function performs bubble sort\ndef bubble_sort(arr):\n    passes = 0\n    is_sorted = False\n    while(not is_sorted):\n        arr, is_sorted = bubble_pass(arr)\n        passes += 1\n    \n    # print answer\n    print(','.join(str(num) for num in arr))\n    print(passes)\n\n# getting and formatting user input\nunsorted_list = input()\nunsorted_list = [int(num) for num in unsorted_list.split(',')]\n\n# sort and print answer\nbubble_sort(unsorted_list)\n",
+			"lang": "Python",
+			"code": "# this function performs a single pass of bubble sort\ndef bubble_pass(arr):\n    is_sorted = True\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            arr[i], arr[i + 1] = arr[i + 1], arr[i]\n            is_sorted = False\n    return arr, is_sorted\n\n# this function performs bubble sort\ndef bubble_sort(arr):\n    passes = 0\n    is_sorted = False\n    while not is_sorted:\n        arr, is_sorted = bubble_pass(arr)\n        passes += 1\n    \n    # print answer\n    print(','.join(str(num) for num in arr))\n    print(passes)\n\n# getting and formatting user input\nunsorted_list = input()\nunsorted_list = [int(num) for num in unsorted_list.split(',')]\n\n# sort and print answer\nbubble_sort(unsorted_list)\n",
 			"explanation": ""
 		}
 	},
@@ -50,7 +50,7 @@
 			"outputs": ["false", "true", "true", "false"]
 		},
 		"solution": {
-			"lang": "python",
+			"lang": "Python",
 			"code": "def is_palindrome(string):\n    all_match = True\n    # compare the front and back halves of the string\n    for i in range(len(string) // 2 + 1):\n        if string[i] != string[len(string) - i - 1]:\n            all_match = False\n    return all_match\n    \n\n# take input and remove spaces and make characters lowercase\ncleaned_string = input().replace(\" \", \"\").lower()\n\nif is_palindrome(cleaned_string):\n    print(\"true\")\nelse:\n    print(\"false\")",
 			"explanation": ""
 		}
@@ -64,7 +64,7 @@
 			"outputs": ["0,1,1,8,9,34,35,36,44,45", "0,0,1,2,3,8,9,10,11,11,13"]
 		},
 		"solution": {
-			"lang": "python",
+			"lang": "Python",
 			"code": "def merge(l1, l2):\n    merged_array = []\n    i, j = 0, 0\n    # merge arrays until one of them is fully used up\n    while i < len(l1) and j < len(l2):\n        if l1[i] < l2[j]:\n            merged_array.append(l1[i])\n            i += 1\n        else:\n            merged_array.append(l2[j])\n            j += 1\n    # add any remaining entries\n    return [str(num) for num in merged_array + l1[i::] + l2[j::]]\n\n\n# take inputs and format them as arrays of integers\narray1 = [int(num) for num in input().split(',')]\narray2 = [int(num) for num in input().split(',')]\n\nprint(','.join(merge(array1, array2)))",
 			"explanation": ""
 		}

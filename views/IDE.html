@@ -11,15 +11,19 @@
 		<div id="editor"></div>
 
 		<div class="interaction-container">
-			<button id = "run-code" class="execution-request" type="button" onclick="runUserCode()">run code</button>
+			<button id = "run-code" class="execution-request" type="button" onclick="runUserCode()">Run Code</button>
 			<select id="language-dropdown"></select>
 		</div>
 		
 		<div id="in-out">
-			<p>Input</p>
-			<textarea id="input-text" rows="8" cols="50"></textarea>
-			<p>Output</p>
-			<pre id="output"></pre>
+			<div>
+				<p>Input</p>
+				<textarea id="input-text"></textarea>
+			</div>
+			<div>
+				<p>Output</p>
+				<pre id="output"></pre>
+			</div>
 		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>

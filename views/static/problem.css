@@ -1,10 +1,11 @@
 #test-cases table {
 	border: 1px solid #AAAAAA;
+	width: 1000px;
 }
 
 #test-cases table tr td {
-	width: 300px;
 	white-space: pre-wrap;
+	border-top: 1px solid #dddddd;
 }
 
 #test-cases table tr td:hover {
@@ -13,9 +14,19 @@
 
 #solution {
 	border: 1px solid #AAAAAA;
-	width: 900px
+	width: 1000px;
+}
+
+#solution pre {
+	padding-left: 10px;
 }
 
 #explanation {
 	color: lime;
+}
+
+#content {
+	width: 1000px;
+	white-space: pre-wrap;
+     word-wrap: break-word;
 }
