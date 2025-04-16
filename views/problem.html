@@ -14,9 +14,13 @@
 		<pre id="content"></pre>
 	</div>
 	<div id="ide"></div>
+	<br>
 	<div id="test-cases">	
 		<p>Test Cases</p>
-		<button id = "run-tests" class="execution-request" type="button" onclick="runTests()">run tests</button>
+		<div class="interaction-container">
+			<button id = "run-tests" class="execution-request" type="button" onclick="runTests()">Run Tests</button>
+		</div>
+		<br>
 		<table id="test-case-table">
 			<tr>
 				<th>Input</th><th>Expected Output</th><th>User Output</th>
@@ -24,7 +28,10 @@
 		</table>
 	</div>
 	<br>
-	<button onclick="revealSolution()" type="button">show solution</button>
+	<div class="interaction-container">
+		<button onclick="revealSolution()" type="button">Show Solution</button>
+	</div>
+	<br>
 	<div id="solution" style="display: none;"></div>
 	<script src="problem.js"></script>
 </body>
