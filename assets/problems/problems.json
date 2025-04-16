@@ -54,5 +54,19 @@
 			"code": "def is_palindrome(string):\n    all_match = True\n    # compare the front and back halves of the string\n    for i in range(len(string) // 2 + 1):\n        if string[i] != string[len(string) - i - 1]:\n            all_match = False\n    return all_match\n    \n\n# take input and remove spaces and make characters lowercase\ncleaned_string = input().replace(\" \", \"\").lower()\n\nif is_palindrome(cleaned_string):\n    print(\"true\")\nelse:\n    print(\"false\")",
 			"explanation": ""
 		}
+	},
+	"3": {
+		"title": "Merge Two Sorted Arrays",
+		"tags": ["Easy", "Sorting", "Arrays"],
+		"content": "Take 2 sorted arrays and merge them into a single sorted array.",
+		"tests": {
+			"inputs": ["1,8,34,35\n0,1,9,36,44,45", "0,0,2,8,9,11,13\n1,3,10,11"],
+			"outputs": ["0,1,1,8,9,34,35,36,44,45", "0,0,1,2,3,8,9,10,11,11,13"]
+		},
+		"solution": {
+			"lang": "python",
+			"code": "def merge(l1, l2):\n    merged_array = []\n    i, j = 0, 0\n    # merge arrays until one of them is fully used up\n    while i < len(l1) and j < len(l2):\n        if l1[i] < l2[j]:\n            merged_array.append(l1[i])\n            i += 1\n        else:\n            merged_array.append(l2[j])\n            j += 1\n    # add any remaining entries\n    return [str(num) for num in merged_array + l1[i::] + l2[j::]]\n\n\n# take inputs and format them as arrays of integers\narray1 = [int(num) for num in input().split(',')]\narray2 = [int(num) for num in input().split(',')]\n\nprint(','.join(merge(array1, array2)))",
+			"explanation": ""
+		}
 	}
 }
