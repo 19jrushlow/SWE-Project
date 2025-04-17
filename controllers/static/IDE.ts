@@ -120,7 +120,7 @@ async function runCode(input: string, target: HTMLElement, trimCredits: boolean)
 	
 	target.textContent = "";
 	
-	fetch(executionURL, 
+	return fetch(executionURL, 
 	{
 		method: "POST",
 		body: JSON.stringify(request),
@@ -180,9 +180,6 @@ async function runTests() {
 	for (let i = 0; i < executionButtons.length; i++) {
 		(executionButtons[i] as HTMLButtonElement).disabled = false;
 	}
-
-	// Wait until the pending changes are completely done updating
-	await new Promise(requestAnimationFrame);
 
 	await checkTests();
 }

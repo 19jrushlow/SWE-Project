@@ -30,6 +30,10 @@ export async function findProblems(searchString: string, statusFilter: string, c
 			difficulty: problem.difficulty
 		}
 
+		if (newProblem.category.toLowerCase() == "test") { 
+			continue;
+		}
+
 		if (statusFilter == "complete" && newProblem.completed == false) {
 			continue;
 		} else if (statusFilter == "incomplete" && newProblem.completed == true) {
