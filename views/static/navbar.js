@@ -22,7 +22,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                   if (profileLink) {
                       profileLink.href = `/user/${user.id}`;
                   }
+                  document.getElementById("nav-signup").parentElement.remove();
+                  document.getElementById("nav-login").parentElement.remove();
               }
+              else {
+                  document.getElementById("nav-profile").parentElement.remove();
+			  }
           } catch (error) {
               console.error("Error fetching user session:", error);
           }
