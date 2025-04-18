@@ -4,6 +4,6 @@ const problemController = require('../controllers/sandbox');
 const IDEController = require('../controllers/IDE');
 
 router.get('/sandbox', problemController.getPage);
-router.get('/', IDEController.getEditor);
+router.get('/IDE', IDEController.getEditor);
 
 module.exports = router;

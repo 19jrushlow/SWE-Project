@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const AppDataSource = require('../models/data-source').default;
 const { User } = require('../models/user');
+const { UserAchievement } = require('../models/user-achievement');
+const { UserProblem } = require('../models/user-problem');
 
 const router = express.Router();
 
@@ -53,6 +55,10 @@ router.post('/user/delete', async (req, res) => {
       return res.status(401).send("Unauthorized: No session.");
     }
 
+    const userAchievementRepo = AppDataSource.getRepository(UserAchievement);
+    await userAchievementRepo.delete({ userId: userId });
+    const userProblemRepo = AppDataSource.getRepository(UserProblem);
+    await userProblemRepo.delete({ userId });
     const userRepository = AppDataSource.getRepository(User);
     await userRepository.delete({ id: userId });
 

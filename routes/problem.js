@@ -5,6 +5,6 @@ const IDEController = require('../controllers/IDE');
 
 router.get('/problem', problemController.getPage);
 router.get('/problems.json', problemController.getProblems)
-router.get('/', IDEController.getEditor);
+router.get('/IDE', IDEController.getEditor);
 
 module.exports = router;
