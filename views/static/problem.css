@@ -1,32 +1,99 @@
-#test-cases table {
-	border: 1px solid #AAAAAA;
-	width: 1000px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-#test-cases table tr td {
-	white-space: pre-wrap;
-	border-top: 1px solid #dddddd;
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-#test-cases table tr td:hover {
-	background-color: rgba(200, 200, 200, 0.3);
+#problem, #ide, #test-cases, #solution {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-#solution {
-	border: 1px solid #AAAAAA;
-	width: 1000px;
+#tags, #content {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+#input-text, #ouptput {
+    width: 90%;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+#in-out div {
+	width: 50%;
+}
+
+button, .search-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+select {
+    padding: 8px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+#test-case-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#test-case-table th, #test-case-table td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.interaction-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 #solution pre {
-	padding-left: 10px;
+    white-space: pre-wrap;
 }
 
-#explanation {
-	color: lime;
+#ide {
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
-#content {
-	width: 1000px;
-	white-space: pre-wrap;
-     word-wrap: break-word;
+.ace_editor {
+	width: 100% !important;
+	height: 400px !important;
 }
