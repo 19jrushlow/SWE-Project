@@ -1,0 +1,12 @@
+{
+	"id": "three_problems",
+	"title": "A Good Start",
+	"description": "Completed three problems. Keep it up!",
+	"image": "../images/three_problems.png",
+	"requirementType": "total-complete",
+	"requirementCount": "3",
+	"attribution": {
+		"creator": "Rikas Dzihab",
+		"source": "https://www.flaticon.com/free-icon/donut_3820545"
+	}
+  }
