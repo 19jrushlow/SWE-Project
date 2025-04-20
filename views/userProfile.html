@@ -19,7 +19,7 @@
 
     <div id="achievements">
       <h3>Achievements</h3>
-      <ul id="achievementList"></ul>
+      <ul id="achievementList" class="achievement-list"></ul>
     </div>
 
     <a id="editProfileLink" href="/user/edit">Edit Profile</a>
@@ -37,18 +37,30 @@
         document.getElementById("userId").textContent = user.username || user.id;
         document.getElementById("userEmail").textContent = user.email || "Not provided";
 
-        // Display achievements
-        const achievementList = document.getElementById("achievementList");
-        if (Array.isArray(user.achievements) && user.achievements.length > 0) {
-          user.achievements.forEach((achievement) => {
-            const li = document.createElement("li");
-            li.textContent = achievement.title || achievement.name || "Unnamed Achievement";
-            achievementList.appendChild(li);
-          });
-        } else {
-          achievementList.innerHTML = "<li>No achievements yet.</li>";
+          // Display achievements
+          const achievementList = document.getElementById("achievementList");
+          if (Array.isArray(user.achievements) && user.achievements.length > 0) {
+            for (let achievement of user.achievements) {
+              const listItem = document.createElement("li");
+              listItem.classList.add("achievement-item");
+
+              // Create a card with the achievement data.
+              listItem.innerHTML = `
+                <div class="achievement-card">
+                  <img src="/assets/achievements/images/${achievement.id}.png" alt="${achievement.title}" class="achievement-image" />
+                  <div class="achievement-content">
+                    <h4>${achievement.title}</h4>
+                    <p>${achievement.description}</p>
+                  </div>
+                </div>
+              `;
+
+              achievementList.appendChild(listItem);
+            }
+          } else {
+            achievementList.innerHTML = "<li>No achievements yet.</li>";
+          }
         }
-      }
 
       // Logout handler
       document.getElementById("logoutButton").addEventListener("click", async () => {

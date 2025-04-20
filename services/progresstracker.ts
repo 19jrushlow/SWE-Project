@@ -1,13 +1,15 @@
 import { Achievement} from "../models/achievement"
 import { UserProblem } from "../models/user-problem"
+import { Problem } from "../models/problem"
 import { UserAchievement } from "../models/user-achievement"
 import { User } from "../models/user"
 
 const AppDataSource = require('../models/data-source').default;
 
 export async function markUserProblemComplete(userId: number, problemId: string) {
+	let points = await getProblemPoints(problemId);
+	
 	try {
-
 		await AppDataSource
 		.getRepository(UserProblem)
 		.createQueryBuilder("user-problem")
@@ -16,6 +18,7 @@ export async function markUserProblemComplete(userId: number, problemId: string)
 		.values({
 			userId: userId,
 			problemId: problemId,
+			points: points,
 		})
 		.orIgnore()
 		.execute()
@@ -72,4 +75,37 @@ export async function awardUserAchievement(userId: number, achievementId: string
 	} catch {
 		console.log("Achievement awardal error! User: " + userId + "Achievement: " + achievementId);
 	}
+}
+
+async function getProblemPoints(problemId: string) {
+	let difficulty = await getDifficulty(problemId)
+	switch (difficulty) {
+		case "easy":
+			return 1
+		case "medium":
+			return 2
+		case "hard":
+			return 3
+		case "extreme":
+			return 4
+		case "ludicrous":
+			return 5
+		default:
+			return 1 // pity point
+	}
+}
+
+async function getDifficulty(problemId: string) {
+	try {
+		const problem = await AppDataSource
+		  .getRepository(Problem)
+		  .createQueryBuilder("problem")
+		  .select("problem.difficulty")
+		  .where("problem.id = :problemId", { problemId })
+		  .getOne();
+		return problem.difficulty.toLowerCase()
+	  } catch (error) {
+		console.error("Error fetching difficulty for problemId: " + problemId)
+		return "null" 
+	  }
 }

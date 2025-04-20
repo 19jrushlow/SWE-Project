@@ -1,12 +1,108 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
+	text-align: center;
+	margin-bottom: 30px;
+	color: #333;
+}
+
+.leaderboard {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.filter-bar-container {
+	margin-bottom: 1rem;
+}
+
+.filter-bar {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.filter-dropdown {
+	padding: 0.5rem;
+}
+
+.reload-button {
+	padding: 0.5rem 1rem;
+	background-color: #575757;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.reload-button:hover {
+	background-color: #444;
+}
+
+table {
+	border-collapse: collapse;
+	font-size: 0.9em;
+	min-width: 800px;
+}
+
+thead {
+	text-align: left;
+	background-color: #575757;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+th, td {
+	padding: 12px 15px;
+}
+
+tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(odd) {
+	background-color: #eeeeff;
+}
+
+tbody tr:nth-of-type(even) {
+	background-color: #fafaff;
+}
+
+tbody tr:last-of-type {
+	border-bottom: 2px solid #575757;
+}
+
+tbody tr.gold-medal td {
+  background-color: #FFD700;
+  color: #333;
+}
+
+tbody tr.silver-medal td {
+  background-color: #C0C0C0;
+  color: #333;
+}
+
+tbody tr.bronze-medal td {
+  background-color: #CD7F32;
+  color: #333;
+}
+
+tbody tr.current-user-border td {
+  border-top: 3px solid red;
+  border-bottom: 3px solid red;
+}
+
+tbody tr.current-user-border td:first-child {
+  border-left: 3px solid red;
+}
+
+tbody tr.current-user-border td:last-child {
+  border-right: 3px solid red;
 }

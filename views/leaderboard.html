@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaderboard</title>
-  <link rel="stylesheet" href="/leaderboard.css"> 
-  <script src="/navbar.js"></script>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Leaderboard</title>
+	<link rel="stylesheet" href="/leaderboard.css"> 
+	<script src="/navbar.js"></script>
 </head>
 <body>
 	<div id="navbar-container"></div>
+	<br>
+	<h1>Leaderboard</h1>
+
+	<div class="leaderboard">
+		<div class="filter-bar-container">
+			<div class="filter-bar">
+		  
+			  <select id="filterTop" class="filter-dropdown">
+				<option value="">All Users</option>
+				<option value="5">Top 5</option>
+				<option value="10">Top 10</option>
+				<option value="20">Top 20</option>
+				<option value="50">Top 50</option>
+			  </select>
+
+			  <select id="filterDate" class="filter-dropdown">
+				<option value="">All Time</option>
+				<option value="Week">Past Week</option>
+				<option value="Month">Past Month</option>
+				<option value="Year">Past Year</option>
+			  </select>
+
+			  <button id="reloadButton" onclick="reloadLeaderboard()" class="reload-button">Reload</button>
+			</div>
+		  </div>
+	
+		<table>
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>User</th>
+					<th>Points</th>
+				</tr>
+			</thead>
+			<tbody id="leaderboardTable"></tbody>
+		</table>
+	</div>
+	<script src="/leaderboard.js"></script>
 </body>
 </html>
