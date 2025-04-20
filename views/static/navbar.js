@@ -27,7 +27,17 @@ document.addEventListener("DOMContentLoaded", async function () {
               }
               else {
                   document.getElementById("nav-profile").parentElement.remove();
-			  }
+              }
+  
+              // highlight current location
+              const currentUrl = window.location.pathname;
+              const navLinks = document.querySelectorAll('.nav-links a');
+              navLinks.forEach(link => {
+              if (link.getAttribute('href') === currentUrl) {
+                link.classList.add('active');
+              }
+  });
+
           } catch (error) {
               console.error("Error fetching user session:", error);
           }
