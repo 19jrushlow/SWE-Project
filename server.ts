@@ -1,5 +1,6 @@
 import * as Loader from "./services/loader"
 import * as ProgressTracker from "./services/progresstracker"
+import * as TestUtils from "./test/utils"
 import { Request, Response } from 'express';
 
 const express = require('express');
@@ -47,6 +48,9 @@ AppDataSource.initialize()
 
         // Load/sync problems
         Loader.loadAllProblems("./assets/problems");
+
+        // Seed database
+        // TestUtils.seedUsersForLeaderboard();
     })
     .catch((error: any) => {
         console.error("Database connection error:", error);
@@ -67,6 +71,9 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'controllers', 'static')));
 app.use(express.static(path.join(__dirname, 'views', 'static')));
 
+// Serve achievement images
+app.use('/assets/achievements/images', express.static(path.join(__dirname, 'assets', 'achievements', 'images')));
+
 app.use('/', homeRoutes);
 app.use('/', signUpRoutes); 
 app.use('/', loginRoutes);
@@ -76,7 +83,7 @@ app.use('/', userProfileRoutes);
 app.use(problemRoutes);
 app.use(sandboxRoutes)
 app.use('/problemset', problemsetRoutes);
-app.use('/leaderboard', leaderboardRoutes);
+app.use(leaderboardRoutes);
 
 // API routes
 app.use('/api/progresstracker', progressTrackerAPI)
