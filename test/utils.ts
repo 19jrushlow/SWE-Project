@@ -113,79 +113,37 @@ async function markDummyProblems(userId: number, problemIdList: string[]) {
 	}
 }
 
+async function constructDummyLeader(email: string, password: string, username: string, problems: string[], targetDate: string) {
+    let userId = await createDummyUser(email, password, username)
+    await markDummyProblems(userId, problems)
+    await overrideCompletionDates(username, targetDate)
+}
+
 export async function createAncientDummyUsers() {
     const targetDate = "1999-12-31";
-    let userId;
-
-    userId = await createDummyUser("oldman1@gmail.com", "1234", "old_man_jenkins");
-    await markDummyProblems(userId, ["test_easy_1"]);
-    await overrideCompletionDates("old_man_jenkins", targetDate);
-
-    userId = await createDummyUser("oldman2@gmail.com", "1234", "old_man_jenkins_jr");
-    await markDummyProblems(userId, ["test_easy_2"]);
-    await overrideCompletionDates("old_man_jenkins_jr", targetDate);
-
-    userId = await createDummyUser("oldman3@gmail.com", "1234", "old_man_paul");
-    await markDummyProblems(userId, ["test_medium_1"]);
-    await overrideCompletionDates("old_man_paul", targetDate);
-
-    userId = await createDummyUser("oldman4@gmail.com", "1234", "old_man_joe");
-    await markDummyProblems(userId, ["test_hard_1"]);
-    await overrideCompletionDates("old_man_joe", targetDate);
-
-    userId = await createDummyUser("oldman5@gmail.com", "1234", "old_man_bob");
-    await markDummyProblems(userId, ["test_extreme_1"]);
-    await overrideCompletionDates("old_man_bob", targetDate);
+    await constructDummyLeader("oldman1@gmail.com", "1234", "old_man_jenkins", ["test_easy_1"], targetDate);
+    await constructDummyLeader("oldman2@gmail.com", "1234", "old_man_jenkins_jr", ["test_easy_2"], targetDate);
+    await constructDummyLeader("oldman3@gmail.com", "1234", "old_man_paul", ["test_medium_1"], targetDate);
+    await constructDummyLeader("oldman4@gmail.com", "1234", "old_man_joe", ["test_hard_1"], targetDate);
+    await constructDummyLeader("oldman5@gmail.com", "1234", "old_man_bob", ["test_extreme_1"], targetDate);
 }
 
 export async function createExpertDummyUsers() {
     const targetDate = "2025-01-31";
-    let userId;
-
-    userId = await createDummyUser("expert1@gmail.com", "1234", "expert_bill");
-    await markDummyProblems(userId, ["test_extreme_1"]);
-    await overrideCompletionDates("expert_bill", targetDate);
-
-    userId = await createDummyUser("expert2@gmail.com", "1234", "expert_steve");
-    await markDummyProblems(userId, ["test_extreme_2"]);
-    await overrideCompletionDates("expert_steve", targetDate);
-
-    userId = await createDummyUser("expert3@gmail.com", "1234", "expert_bob");
-    await markDummyProblems(userId, ["test_extreme_3"]);
-    await overrideCompletionDates("expert_bob", targetDate);
-
-    userId = await createDummyUser("expert4@gmail.com", "1234", "expert_ash");
-    await markDummyProblems(userId, ["test_extreme_1", "test_extreme_2"]);
-    await overrideCompletionDates("expert_ash", targetDate);
-
-    userId = await createDummyUser("expert5@gmail.com", "1234", "expert_brock");
-    await markDummyProblems(userId, ["test_extreme_1", "test_extreme_2", "test_extreme_3"]);
-    await overrideCompletionDates("expert_brock", targetDate);
+    await constructDummyLeader("expert1@gmail.com", "1234", "expert_bill", ["test_extreme_1"], targetDate);
+    await constructDummyLeader("expert2@gmail.com", "1234", "expert_steve", ["test_extreme_2"], targetDate);
+    await constructDummyLeader("expert3@gmail.com", "1234", "expert_bob", ["test_extreme_3"], targetDate);
+    await constructDummyLeader("expert4@gmail.com", "1234", "expert_ash", ["test_extreme_1", "test_extreme_2"], targetDate);
+    await constructDummyLeader("expert5@gmail.com", "1234", "expert_brock", ["test_extreme_1", "test_extreme_2", "test_extreme_3"], targetDate);
 }
 
 export async function createNoobDummyUsers() {
     const targetDate = "2025-04-10";
-    let userId;
-
-    userId = await createDummyUser("noob1@gmail.com", "1234", "noob_master_123");
-    await markDummyProblems(userId, ["test_easy_1"]);
-    await overrideCompletionDates("noob_master_123", targetDate);
-
-    userId = await createDummyUser("noob2@gmail.com", "1234", "noob_steve");
-    await markDummyProblems(userId, ["test_easy_2"]);
-    await overrideCompletionDates("noob_steve", targetDate);
-
-    userId = await createDummyUser("noob3@gmail.com", "1234", "noob_bob");
-    await markDummyProblems(userId, ["test_easy_3"]);
-    await overrideCompletionDates("noob_bob", targetDate);
-
-    userId = await createDummyUser("noob4@gmail.com", "1234", "noob_timmy");
-    await markDummyProblems(userId, ["test_easy_1", "test_easy_2"]);
-    await overrideCompletionDates("noob_timmy", targetDate);
-
-    userId = await createDummyUser("noob5@gmail.com", "1234", "noob_elvis");
-    await markDummyProblems(userId, ["test_easy_1", "test_easy_2", "test_easy_3"]);
-    await overrideCompletionDates("noob_elvis", targetDate);
+    await constructDummyLeader("noob1@gmail.com", "1234", "noob_master_123", ["test_easy_1"], targetDate);
+    await constructDummyLeader("noob2@gmail.com", "1234", "noob_steve", ["test_easy_2"], targetDate);
+    await constructDummyLeader("noob3@gmail.com", "1234", "noob_bob", ["test_easy_3"], targetDate);
+    await constructDummyLeader("noob4@gmail.com", "1234", "noob_timmy", ["test_easy_1", "test_easy_2"], targetDate);
+    await constructDummyLeader("noob5@gmail.com", "1234", "noob_elvis", ["test_easy_1", "test_easy_2", "test_easy_3"], targetDate);
 }
 
 export async function seedUsersForLeaderboard() {
