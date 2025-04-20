@@ -16,9 +16,16 @@ module.exports = {
                 return res.status(400).send("Missing required fields");
             }
 
+            // Check if username already exists
+            const userRepository = AppDataSource.getRepository(User);
+            const existingUser = await userRepository.findOne({ where: { username } });
+
+            if (existingUser) {
+                return res.status(400).send("Username is already taken.");
+            }
+
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            const userRepository = AppDataSource.getRepository(User);
             const newUser = userRepository.create({
                 username,
                 email,

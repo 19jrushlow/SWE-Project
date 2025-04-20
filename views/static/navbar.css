@@ -52,12 +52,7 @@ body {
     border-radius: 4px;
 }
 
-.nav-links a:hover {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.nav-links .active {
+.nav-links a:hover, .nav-links .active {
     background-color: #4CAF50;
     color: white;
 }

@@ -13,6 +13,15 @@ interface Problem {
 	}
 }
 
+interface ProblemMatch {
+	completed: boolean;
+	problemId: string;
+	title: string;
+	category: string;
+	difficulty: string;
+}
+
+
 if(window.location.pathname == '/problem') {
 	loadProblem();
 }
@@ -40,6 +49,7 @@ async function loadProblem() {
 			document.getElementById('title').innerHTML = problem.title;
 			document.getElementById('content').innerHTML = problem.content;
 			document.getElementById('tags').innerHTML = 'Tags: ' + problem.tags.join(', ');
+			problemStatus();
 			
 			// add test cases
 			const table = document.getElementById('test-case-table') as HTMLElement;
@@ -92,6 +102,72 @@ function revealSolution() {
 	}
 	else {
 		solutionElement.style.display = 'block';
+	}
+}
+
+async function problemStatus() {
+	const urlParams = new URLSearchParams(window.location.search);
+	const problemId : string = urlParams.get('problemID');
+	
+	let userId : number = -1;
+	const response = await fetch("/api/user/session");
+    if (response.ok) {
+		const user = await response.json();
+		userId = user.id;
+    }
+	
+	let searchString: string = "";
+	let statusFilter: string = "complete";
+	let categoryFilter: string = "";
+	let difficultyFilter: string = "";
+	
+	try {
+		// Allow for timeouts
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+		const response = await Promise.race([
+			fetch('/api/search/findProblems', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					searchString,
+					statusFilter,
+					categoryFilter,
+					difficultyFilter,
+					userId
+				}),
+				signal: controller.signal
+			}),
+		]);
+		
+		clearTimeout(timeoutId);
+
+		if (!response.ok) {
+			throw new Error(`Server responded with status ${response.status}`);
+		}
+
+		const data = await response.json();
+		let complete = false;
+		
+		for (const problemMatch of data.problemMatches as ProblemMatch[]) {
+			if (problemMatch.problemId == problemId) {
+				complete = true;
+			}
+		}
+		
+		const statusElement = document.getElementById("title") as HTMLHeadingElement;
+		
+		if (complete) {
+			statusElement.innerHTML += " &#10003;";
+		} else {
+			console.log(userId, complete);
+		}
+		
+	} catch (error) {
+		console.log("error getting completion status", error);
 	}
 }
 

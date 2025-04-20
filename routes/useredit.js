@@ -29,6 +29,12 @@ router.post('/user/update', async (req, res) => {
     const userRepository = AppDataSource.getRepository(User);
     const user = await userRepository.findOneBy({ id: userId });
 
+   // Check if username already exists
+    const existingUser = await userRepository.findOne({ where: { username } });
+    if (existingUser) {
+        return res.status(400).send("Username is already taken.");
+    }
+
     if (!user) {
       return res.status(404).send("User not found");
     }

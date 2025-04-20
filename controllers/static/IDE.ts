@@ -206,6 +206,8 @@ async function checkTests() {
 
 	// none were wrong, call API to mark the problem as complete for the user
 	if (!anyWrong) {
+		(document.getElementById("title") as HTMLHeadingElement).innerHTML += " &#10003;";
+		
 		const response = await fetch("/api/user/session");
 
     	if (response.ok) {
