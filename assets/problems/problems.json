@@ -68,5 +68,89 @@
 			"code": "def merge(l1, l2):\n    merged_array = []\n    i, j = 0, 0\n    # merge arrays until one of them is fully used up\n    while i < len(l1) and j < len(l2):\n        if l1[i] < l2[j]:\n            merged_array.append(l1[i])\n            i += 1\n        else:\n            merged_array.append(l2[j])\n            j += 1\n    # add any remaining entries\n    return [str(num) for num in merged_array + l1[i::] + l2[j::]]\n\n\n# take inputs and format them as arrays of integers\narray1 = [int(num) for num in input().split(',')]\narray2 = [int(num) for num in input().split(',')]\n\nprint(','.join(merge(array1, array2)))",
 			"explanation": ""
 		}
+	},
+	"4": {
+		"title": "Convert Base",
+		"tags": ["Medium", "Numbers"],
+		"content": "Given a number in decimal, convert it to a specified base between 2 and 16.",
+		"tests": {
+			"inputs": ["254,2","133,3","1701,16"],
+			"outputs": ["11111110","11221","6A5"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
+	},
+	"5": {
+		"title": "Integer Partitions",
+		"tags": ["Hard", "Numbers"],
+		"content": "Compute the number of ways to partition a given integer. Try and do it as efficiently as possible, since it will be slow for large integers.",
+		"tests": {
+			"inputs": ["5","7","20"],
+			"outputs": ["7","15","627"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
+	},
+	"6": {
+		"title": "Powersets",
+		"tags": ["Medium", "Sets"],
+		"content": "Find every subset of a given array.",
+		"tests": {
+			"inputs": ["1,2,3,4","a,b,c"],
+			"outputs": ["[],[1],[2],[3],[4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4],[1,2,3],[1,2,4],[1,3,4],[2,3,4],[1,2,3,4]","[],[a],[b],[c],[a,b],[a,c],[b,c],[a,b,c]"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
+	},
+	"7": {
+		"title": "Binary Tree Traversal",
+		"tags": ["Hard", "Trees"],
+		"content": "Given a binary tree in array form, do a level order, preorder, inorder, and postorder traversal. Assuming 0-indexing, a node's left and right children are given by 2i+1 and 2i+2 respectively. An underscore will denote the absence of a node in that spot.",
+		"tests": {
+			"inputs": ["0,1,2,3,4,_,5", "a,_,b,_,_,_,c,_,_,_,_,_,_,d,e"],
+			"outputs": ["0,1,2,3,4,5\n0,1,3,4,2,5\n3,1,4,0,2,5\n3,4,1,5,2,0", "a,b,c,d,e\na,b,c,d,e\na,b,d,c,e\nd,e,c,b,a"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
+	},
+	"8": {
+		"title": "String Arithmetic",
+		"tags": ["Hard", "Strings", "Numbers"],
+		"content": "Parse and evaluate a given mathematical expression. Allow for complex numbers and decimals.",
+		"tests": {
+			"inputs": ["6*8+4^(2-3)", "1+2.3(3-4.5/5)-7", "i(1+2i+3*i^2)-3.3"],
+			"outputs": ["48.25", "-1.17","-5.3-2i"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
+	},
+	"9": {
+		"title": "Determinants",
+		"tags": ["Hard", "Numbers", "Arrays"],
+		"content": "Compute the determinant of a given matrix using Gaussian elimination. Do not use cofactor expansion, since it will be very slow for large matrices. Allow for complex numbers.",
+		"tests": {
+			"inputs": ["5,3,2\n1,2,3\n1,1,2","1,1+i,2,2\ni,i,3-2i,4\n4-4i,3,2,1\n1,2,3,-5i"],
+			"outputs": ["-12","-64-30i"]
+		},
+		"solution": {
+			"lang": "",
+			"code": "",
+			"explanation": "No solution available."
+		}
 	}
 }

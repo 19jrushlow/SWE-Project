@@ -72,6 +72,7 @@ select {
     text-align: left;
     vertical-align: top;
     word-wrap: break-word;
+	white-space: pre-wrap;
 }
 
 .interaction-container {
