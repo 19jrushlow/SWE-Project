@@ -14,6 +14,9 @@ export class UserProblem {
 	@Column()
 	public problemId: string
 
+	@Column()
+	public points: number
+
 	@CreateDateColumn({ name: 'dateReceived', type: 'timestamp' })
 	public dateReceived: Date;
 
