@@ -1,7 +1,7 @@
 {
 	"id": "category_master",
 	"title": "Category Master",
-	"description": "Completed problems of three different categories. Impressive!",
+	"description": "Completed problems in three different categories. Impressive!",
 	"image": "../images/category_master.png",
 	"requirementType": "categories-complete",
 	"requirementCount": "3",
