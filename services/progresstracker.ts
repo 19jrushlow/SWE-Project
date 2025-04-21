@@ -30,31 +30,86 @@ export async function markUserProblemComplete(userId: number, problemId: string)
 }
 
 async function updateAchievementCompletion(userId: number) {
-	// very rudimentary, this is gonna change
-	var totalComplete: number = await getUserTotalProblemCompletion(userId);
-	var allAchievements: Achievement[] = await getAllAchievements();
-	for (const achievement of allAchievements) {
-		console.log("User: " + userId + " Total complete: " + totalComplete);
-		if (achievement.requirementType == "total-complete" && totalComplete >= achievement.requirementCount) {
+	var missingAchievements: Achievement[] = await getMissingAchievements(userId);
+	for (const achievement of missingAchievements) {
+		let requirementScore = await processRequirement(userId, achievement.requirementType)
+		console.log("Checking achievement: " + achievement.id + " For user: " + userId + "/n")
+		console.log("Requirement type: " + achievement.requirementType + " Score: " + requirementScore + " Needs: " + achievement.requirementCount)
+		if (requirementScore >= achievement.requirementCount) {
 			awardUserAchievement(userId, achievement.id);
 		}
 	}
 	
 }
 
+async function processRequirement(userId: number, requirementType: string) {
+	let processedString = requirementType.slice(0, requirementType.indexOf('-'))
+	switch(processedString) {
+		case "total":
+			return await getUserTotalProblemCompletion(userId);
+		case "categories":
+			return await getTotalCategoriesCompleted(userId);
+		default:
+			return await getTotalCompletionByCat(userId, processedString);
+	}
+}
+
+async function getTotalCategoriesCompleted(userId: number) {
+	const totalCategories = await AppDataSource
+		.getRepository(UserProblem)
+		.createQueryBuilder("user-problem")
+		.innerJoin("user-problem.problem", "problem")
+		.where("user-problem.userId = :userId", { userId })
+		.select("COUNT(DISTINCT problem.category)", "count")
+		.getRawOne();
+
+	return (totalCategories.count) ?? 0;
+}
+
+async function getTotalCompletionByCat(userId: number, categoryFilter: string) {
+	const totalCompletionInCategory = await AppDataSource
+		.getRepository(UserProblem)
+		.createQueryBuilder("user-problem")
+		.innerJoin("user-problem.problem", "problem")
+		.where("user-problem.userId = :userId", { userId })
+		.andWhere("LOWER(problem.category) = :categoryFilter", { categoryFilter })
+		.select("COUNT(user-problem.id)", "count")
+		.getRawOne();
+
+	return (totalCompletionInCategory.count) ?? 0;
+}
+
 async function getAllAchievements () {
 	const achievements = await AppDataSource
-    	.getRepository(Achievement)
-    	.createQueryBuilder("achievement")
-    	.getMany();
+		.getRepository(Achievement)
+		.createQueryBuilder("achievement")
+		.getMany();
 	return achievements;
+}
+
+async function getMissingAchievements(userId: number) {
+	const missingAchievements = await AppDataSource
+		.getRepository(Achievement)
+		.createQueryBuilder("achievement")
+		.where((query: any) => {
+			const subQuery = query.subQuery()
+				.select("userAchievement.achievementId")
+				.from(UserAchievement, "userAchievement")
+				.where("userAchievement.userId = :userId")
+				.getQuery();
+			return "achievement.id NOT IN " + subQuery;
+		})
+		.setParameter("userId", userId)
+		.getMany();
+
+	return missingAchievements;
 }
 
 async function getUserTotalProblemCompletion(userId: number) {
 	const totalComplete = await AppDataSource
-    	.getRepository(UserProblem)
-    	.createQueryBuilder("user-problem")
-    	.where("user-problem.userId = :id", { id: userId })
+		.getRepository(UserProblem)
+		.createQueryBuilder("user-problem")
+		.where("user-problem.userId = :id", { id: userId })
 		.getCount()
 	return totalComplete;
 }
