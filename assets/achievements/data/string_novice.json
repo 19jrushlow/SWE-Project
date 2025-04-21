@@ -1,0 +1,12 @@
+{
+	"id": "string_novice",
+	"title": "String Novice",
+	"description": "Completed a string problem. ",
+	"image": "../images/string_novice.png",
+	"requirementType": "strings-complete",
+	"requirementCount": "1",
+	"attribution": {
+		"creator": "Freepik",
+		"source": "https://www.flaticon.com/free-icon/string_4038587"
+	}
+  }
