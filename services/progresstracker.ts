@@ -30,7 +30,7 @@ export async function markUserProblemComplete(userId: number, problemId: string)
 }
 
 async function updateAchievementCompletion(userId: number) {
-	var missingAchievements: Achievement[] = await getMissingAchievements(userId);
+	let missingAchievements: Achievement[] = await getMissingAchievements(userId);
 	for (const achievement of missingAchievements) {
 		let requirementScore = await processRequirement(userId, achievement.requirementType)
 		console.log("Checking achievement: " + achievement.id + " For user: " + userId + "/n")
