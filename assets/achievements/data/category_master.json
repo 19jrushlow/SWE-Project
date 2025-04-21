@@ -1,0 +1,12 @@
+{
+	"id": "category_master",
+	"title": "Category Master",
+	"description": "Completed problems of three different categories. Impressive!",
+	"image": "../images/category_master.png",
+	"requirementType": "categories-complete",
+	"requirementCount": "3",
+	"attribution": {
+		"creator": "Freepik",
+		"source": "https://www.flaticon.com/free-icon/restaurant-eating-tools-set-of-three-pieces_45266"
+	}
+  }
