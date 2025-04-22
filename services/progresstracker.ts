@@ -164,3 +164,15 @@ async function getDifficulty(problemId: string) {
 		return "null" 
 	  }
 }
+
+export async function updateUserAchievements() {
+	let users = await AppDataSource
+		.getRepository(User)
+		.createQueryBuilder("user")
+		.getMany()
+
+	console.log("Starting achievement update")
+	for (const user of users) {
+		await updateAchievementCompletion(user.id)
+	}
+}
