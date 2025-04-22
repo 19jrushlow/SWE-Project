@@ -115,6 +115,9 @@ function populateLanguageDropdown() {
 
 // input is the input fed to the user's program, target is where to display the result, trimCredits should only be used for test cases to clean the API response
 async function runCode(input: string, target: HTMLElement, trimCredits: boolean): Promise<void> {
+	// Save attempt
+	saveUserContent()
+
 	request.source = editor.getValue();
 	request.options.executeParameters = {stdin: input};
 	
@@ -186,6 +189,8 @@ async function runTests() {
 
 async function checkTests() {
 	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
+
+	saveUserContent()
 
 	// check for completion
 	let anyWrong: boolean = false;

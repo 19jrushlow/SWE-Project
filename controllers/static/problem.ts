@@ -109,12 +109,7 @@ async function problemStatus() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const problemId : string = urlParams.get('problemID');
 	
-	let userId : number = -1;
-	const response = await fetch("/api/user/session");
-    if (response.ok) {
-		const user = await response.json();
-		userId = user.id;
-    }
+	let userId = await fetchUserId()
 	
 	let searchString: string = "";
 	let statusFilter: string = "complete";
@@ -201,21 +196,174 @@ async function fetchIDE() {
 
 // these scripts are needed for IDE functionality
 function loadIDEScripts() {
-    const aceScript = document.createElement('script');
+	const aceScript = document.createElement('script');
 	const ideScript = document.createElement('script');
 	
-    aceScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js';
-	aceScript.onload = () => {
+	aceScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js';
+	aceScript.onload = async () => {
 		ideScript.src = 'IDE.js';
 		ideScript.onerror = (error) => {
 			console.error('Failed to load IDE.js:', error);
 		};
+		await loadUserAttempt()
 	}
-    aceScript.onerror = (error) => {
-        console.error('Failed to load ace.js:', error);
-    };
+	aceScript.onerror = (error) => {
+		console.error('Failed to load ace.js:', error);
+	};
 	
 	const ide = document.getElementById('ide');
-    ide.appendChild(aceScript);
+	ide.appendChild(aceScript);
 	ide.appendChild(ideScript);
+}
+
+async function fetchUserId() {
+	let userId : number = -1;
+	const response = await fetch("/api/user/session");
+	if (response.ok) {
+		const user = await response.json();
+		userId = user.id;
+	}
+	return userId
+}
+
+async function loadUserAttempt() {
+	await getUserContent()
+}
+
+async function processUrl() {
+	// Get the full URL
+	let url = new URL(window.location.href);
+
+	// Extract the pathname
+	let pageId = url.pathname;
+
+	// Add the url query (?problemid=X)
+	if (url.search) { pageId += url.search }
+
+	return pageId
+}
+
+async function getUserContent() {
+	let userId = await fetchUserId()
+
+	// Not logged in
+	if (userId == -1) {
+		return ""
+	}
+
+	createSaveButton()
+
+	console.log("Trying to get user content for: " + userId)
+
+	// Call the API to load the user attempt
+	try {
+		// Allow for timeouts
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+		let pageId = await processUrl()
+
+		const response = await Promise.race([
+			fetch('/api/attempts/loadAttempt', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					userId,
+					pageId
+				}),
+				signal: controller.signal
+			}),
+		]);
+
+		clearTimeout(timeoutId);
+
+		if (response.ok) {
+			const data = await response.json();
+			// set language if there was a valid setting
+			if (data.attempt.language != "") { 
+				setLanguage(data.attempt.language)
+				// update the selector too:
+				const languageDropdown = document.getElementById("language-dropdown") as HTMLSelectElement;
+				const input = document.getElementById('input-text') as HTMLTextAreaElement
+				languageDropdown.value = data.attempt.language;
+				input.value = data.attempt.input
+			}
+
+			let userEditor = ace.edit("editor")
+			userEditor.setValue(data.attempt.content)
+			userEditor.selection.clearSelection();
+		}
+	} catch (error) {
+		console.error('Error saving attempt:', error);
+	}
+}
+
+async function saveUserContent() {
+	let userId = await fetchUserId()
+
+	// Not logged in
+	if (userId == -1) {
+		return
+	}
+
+	console.log("Trying to save user content for: " + userId)
+
+	// Call the API to save the user attempt
+	try {
+		// Allow for timeouts
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+		const languageDropdown = document.getElementById("language-dropdown") as HTMLSelectElement;
+
+		// get the vals
+		let userEditor = ace.edit("editor")
+		let userContent = userEditor.getValue()
+		let pageId = await processUrl()
+		let language = languageDropdown.value
+		let input = (document.getElementById('input-text') as HTMLTextAreaElement).value
+
+		console.log(userContent + " " + language)
+
+		const response = await Promise.race([
+			fetch('/api/attempts/saveAttempt', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					userId,
+					pageId,
+					userContent,
+					language,
+					input
+				}),
+				signal: controller.signal
+			}),
+		]);
+
+		clearTimeout(timeoutId);
+	} catch (error) {
+		console.error('Error saving attempt:', error);
+	} finally {
+		// disable save button maybe? not gonna bother right now
+	}
+}
+
+async function createSaveButton() {
+	const saveButton = document.createElement("button")
+	saveButton.id = "save-code"
+	saveButton.className = "execution-request"
+	saveButton.type = "button"
+	saveButton.textContent = "Save Code"
+	saveButton.onclick = function() {
+		saveUserContent()
+	};
+
+	// Add the button to the interaction container
+	const interactionContainer = document.querySelector(".interaction-container")
+	const firstButton = interactionContainer.firstChild
+    interactionContainer.insertBefore(saveButton, firstButton)
 }
