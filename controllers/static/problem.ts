@@ -231,6 +231,19 @@ async function loadUserAttempt() {
 	let userContent = await getUserContent(userId)
 }
 
+async function processUrl() {
+	// Get the full URL
+	let url = new URL(window.location.href);
+
+	// Extract the pathname
+	let pageId = url.pathname;
+
+	// Add the url query (?problemid=X)
+	if (url.search) { pageId += url.search }
+
+	return pageId
+}
+
 async function getUserContent(userId: number) {
 	// Not logged in
 	if (userId == -1) {
@@ -247,8 +260,7 @@ async function getUserContent(userId: number) {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-		// Get pageID
-		let pageId = window.location.pathname;
+		let pageId = await processUrl()
 
 		const response = await Promise.race([
 			fetch('/api/attempts/loadAttempt', {
@@ -308,7 +320,7 @@ async function saveUserContent() {
 		// get the vals
 		let userEditor = ace.edit("editor")
 		let userContent = userEditor.getValue()
-		let pageId = window.location.pathname;
+		let pageId = await processUrl()
 		let language = languageDropdown.value
 		let input = (document.getElementById('input-text') as HTMLTextAreaElement).value
 
