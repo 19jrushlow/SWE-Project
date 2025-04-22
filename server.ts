@@ -50,6 +50,9 @@ AppDataSource.initialize()
         // Load/sync problems
         Loader.loadAllProblems("./assets/problems");
 
+        // Update user achievements
+        ProgressTracker.updateUserAchievements();
+
         // Seed database
         // TestUtils.seedUsersForLeaderboard();
     })
@@ -114,7 +117,10 @@ app.get('/api/user/session', async (req: Request, res: Response) => {
         relations: ["achievement"]
       });
   
-      const achievements = userAchievements.map((ua: UserAchievement) => ua.achievement);
+      const achievements = userAchievements.map((ua: UserAchievement) => ({
+        ...ua.achievement,
+        dateReceived: ua.dateReceived
+      }));
   
       // Step 3: Return everything together
       res.json({
