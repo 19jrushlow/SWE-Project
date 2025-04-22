@@ -191,6 +191,8 @@ async function runTests() {
 async function checkTests() {
 	const testTable = document.getElementById('test-case-table') as HTMLTableElement;
 
+	saveUserContent()
+
 	// check for completion
 	let anyWrong: boolean = false;
 	for (let i = 1, row; row = testTable.rows[i]; i++) {
