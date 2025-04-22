@@ -1,5 +1,4 @@
 import { UserAttempt } from "../models/user-attempt"
-import { User } from "../models/user"
 
 const AppDataSource = require('../models/data-source').default;
 

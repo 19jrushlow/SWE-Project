@@ -227,8 +227,7 @@ async function fetchUserId() {
 }
 
 async function loadUserAttempt() {
-	let userId = await fetchUserId()
-	let userContent = await getUserContent(userId)
+	await getUserContent()
 }
 
 async function processUrl() {
@@ -244,7 +243,9 @@ async function processUrl() {
 	return pageId
 }
 
-async function getUserContent(userId: number) {
+async function getUserContent() {
+	let userId = await fetchUserId()
+
 	// Not logged in
 	if (userId == -1) {
 		return ""
