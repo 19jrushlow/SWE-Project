@@ -6,6 +6,7 @@ import { Achievement } from "./achievement"
 import { Leaderboard } from "./leaderboard"
 import { UserAchievement } from "./user-achievement"
 import { UserProblem } from "./user-problem"
+import { UserAttempt } from "./user-attempt"
 
 const config = require('../config/config.js');
 
@@ -18,7 +19,7 @@ const AppDataSource = new DataSource({
     database: config.pg_database,
     synchronize: true,
     logging: true,
-    entities: [User, Achievement, Problem, Leaderboard, UserAchievement, UserProblem],
+    entities: [User, Achievement, Problem, Leaderboard, UserAchievement, UserProblem, UserAttempt],
     subscribers: [],
     migrations: [],
 })
