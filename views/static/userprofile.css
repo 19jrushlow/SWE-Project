@@ -98,6 +98,10 @@ h1 {
 }
 
 .achievement-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
     padding: 1rem;
 }
 
@@ -111,4 +115,11 @@ h1 {
     margin: 0;
     font-size: 14px;
     color: #555;
+}
+
+.achievement-content .achievement-date {
+    font-size: 13px;
+    color: #888;
+    margin-top: 0.5rem;
+    font-style: italic;
 }
