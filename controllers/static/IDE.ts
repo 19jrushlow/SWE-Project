@@ -120,32 +120,29 @@ async function runCode(input: string, target: HTMLElement, trimCredits: boolean)
 
 	request.source = editor.getValue();
 	request.options.executeParameters = {stdin: input};
+
+	target.textContent = ""
 	
-	target.textContent = "";
-	
-	return fetch(executionURL, 
-	{
-		method: "POST",
-		body: JSON.stringify(request),
-		headers: {"Content-type": "application/json"},
-	})
-	.then(response => {
-		if (!response.ok) {
-			throw new Error('idk2');
-		}
-		return response.text();
-	})
-	.then(data => {
+	let response = await fetch('/api/compiler/runCode', {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+		  request,
+		  executionURL
+		}),
+	  });
+
+	if (response.ok) {
+		let data = await response.text()
 		if (target) {
 			if (trimCredits) {
 				data = data.split('\n').slice(3).join('\n');
 			}
 			target.textContent = data;
 		}
-	})
-	.catch(error => {
-		console.error('Error:', error);
-	});
+	}
 }
 
 // sends user code to compiler explorer API
@@ -215,7 +212,7 @@ async function checkTests() {
 		
 		const response = await fetch("/api/user/session");
 
-    	if (response.ok) {
+		if (response.ok) {
 			const user = await response.json();
 			const urlParams = new URLSearchParams(window.location.search);
 			const problemId = urlParams.get('problemID');
@@ -232,7 +229,7 @@ async function checkTests() {
 				}),
 		  	});
 
-      	} else {
+	  	} else {
 			console.log("Guest completed a problem successfully");
 	  	}
 	}
