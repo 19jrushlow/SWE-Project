@@ -28,6 +28,8 @@ const leaderboardRoutes = require('./routes/leaderboard');
 const progressTrackerAPI = require('./routes/progresstracker');
 const searchAPI = require('./routes/search');
 const attemptsAPI = require('./routes/attempts');
+const compilerAPI = require('./routes/compiler');
+
 
 const AppDataSource = require('./models/data-source').default;
 const { User } = require('./models/user');
@@ -93,6 +95,7 @@ app.use(leaderboardRoutes);
 app.use('/api/progresstracker', progressTrackerAPI)
 app.use('/api/search', searchAPI)
 app.use('/api/attempts', attemptsAPI)
+app.use('/api/compiler', compilerAPI)
 
 // API to Get User Session
 app.get('/api/user/session', async (req: Request, res: Response) => {
